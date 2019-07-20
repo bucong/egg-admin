@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>登录</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+	<link type="text/css" href="../../public/css/admin.css" rel="stylesheet" />
+</head>
+<body>
+
+<div class="container" align="center">
+	<div class="col-md-6" style="margin-top: 20%;">
+		<div class="inset">
+			<form name="login" id="login" method="post" action="/admin/doLogin">
+				<input type="hidden" name="_csrf" value="<%=csrf%>">
+				<div>
+					<h2>后台管理系统</h2>
+					<span style="text-align: left;text-indent: 0.4em;"><label>用户名</label></span>
+					<span><input type="text" name="username" class="textbox" required/></span>
+				</div>
+				<div>
+					<span style="text-align: left;text-indent: 0.4em;"><label>密码</label></span>
+					<span><input  name="password" type="password" class="password" required /></span>
+				</div>
+				<div>
+					<span style="text-align: left;text-indent: 0.4em;"><label>验证码</label></span>
+					<span>
+						<div class="verify-box">
+							<input  name="verify" type="text" class="verify-input" required width="60%" />
+							<img src="/admin/verify" class="verify" alt="" title="看不清？点击刷新" onclick="javascript:this.src='/admin/verify?mt='+Math.random()" />
+						</div>
+					</span>
+				</div>
+				<div class="sign">
+					<input type="reset"  class="submit" value="重置"/>
+					<input type="submit" value="登录" class="submit" />
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
