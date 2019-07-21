@@ -57,7 +57,7 @@ module.exports = appInfo => {
       port: '3306',
       user: 'root',
       password: 'Bucong0934',
-      database: 'egg',
+      database: 'eggadmin',
     },
     // 是否加载到 app 上，默认开启
     app: true,

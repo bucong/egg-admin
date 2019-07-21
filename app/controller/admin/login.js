@@ -1,7 +1,8 @@
 'use strict';
 
 const BaseController = require('./base');
-let svgCaptcha = require('svg-captcha');
+const svgCaptcha = require('svg-captcha');
+const md5 = require('md5');
 
 class LoginController extends BaseController {
   // 登录页
@@ -10,12 +11,28 @@ class LoginController extends BaseController {
   }
   // 登录接口
   async doLogin() {
-    console.log(this.ctx.request.body);
-    console.log(this.ctx.session.verify);
-    this.ctx.session.adminInfo = {
-      user: this.ctx.request.body.username
+    let username = this.ctx.request.body.username;
+    let password = this.ctx.request.body.password;
+    let verify = this.ctx.request.body.verify;
+    if(username.length < 5 || password.length < 5){
+      await this.error('/admin/login', '用户名和密码不能少于5位');
+    }else if(verify.toUpperCase() != this.ctx.session.verify.toUpperCase()){
+      await this.error('/admin/login', '验证码不正确');
+    }else{
+      const result = await this.app.mysql.select('admin', {
+        columns: ['id', 'username', 'right'],
+        where: {
+          username,
+          password: md5(password)
+        }
+      })
+      if(result.length > 0){
+        this.ctx.session.adminInfo = result[0];
+        await this.success();
+      }else{
+        await this.error('/admin/login', '用户名或密码错误');
+      }
     }
-    await this.success();
   }
   // 验证码
   async verify() {
