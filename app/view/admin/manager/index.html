@@ -1,12 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-</head>
-<body>
-  后台
-</body>
-</html>
+<%- include ../public/pageHeader.html %>
+
+<div class="home">
+	<h1>管理员列表</h1>
+	<table class="table">
+		<tr>
+			<th>管理员</th>
+			<th>权限</th>
+			<th>操作</th>
+		</tr>
+		<% for (let item of manager) { %>
+		<tr>
+			<td><%= item.username %></td>
+			<td><%= item.right %></td>
+			<td><a href="/admin/delete?model=admin&id=<%= item.id %>">删除</a></td>
+		</tr>
+		<% } %>
+	</table>
+</div>
+
+<%- include ../public/pageFooter.html %>

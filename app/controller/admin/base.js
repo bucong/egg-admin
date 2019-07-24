@@ -15,6 +15,16 @@ class BaseController extends Controller {
       msg: msg || '操作失败！'
     });
   }
+  // 删除方法  
+  async delete() {
+    let model = this.ctx.request.query.model; // 获取表名
+    let id = this.ctx.request.query.id;
+    await this.app.mysql.delete(model, {
+      id: id
+    })
+    // 返回原页面
+    this.ctx.redirect(this.ctx.state.prevPage);
+  }
 }
 
 module.exports = BaseController;

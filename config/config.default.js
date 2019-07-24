@@ -16,7 +16,7 @@ module.exports = appInfo => {
   }
 
   // add your config here
-  config.middleware = ['adminauth'];
+  config.middleware = ['adminauth', 'compress'];
   config.adminauth = {
     match: '/admin'
   }

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>后台管理系统</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+	<link type="text/css" href="../../../public/css/admin.css" rel="stylesheet" />
+</head>
+<body>
+  <header>
+    <div class="flex">
+			<div class="logo">后台管理</div>
+			<div class="admin-info">
+				<span><%=adminInfo.username%></span>
+				<a href="/admin/loginOut">退出</a>
+			</div>
+		</div>
+	</header>
+	<div class="content-box">
+		<aside>
+			<div class="nav-item">
+				<h2>管理员管理</h2>
+				<ul>
+					<li><a href="/admin">管理员列表</a></li>
+					<li><a href="/admin/manager/add">添加管理员</a></li>
+				</ul>
+			</div>
+			<div class="nav-item">
+				<h2>管理员列表</h2>
+				<ul>
+					<li><a href="">管理员列表</a></li>
+					<li><a href="">管理员列表</a></li>
+				</ul>
+			</div>
+			<div class="nav-item">
+				<h2>管理员管理</h2>
+				<ul>
+					<li>管理员列表</li>
+					<li>增加管理员</li>
+				</ul>
+			</div>		
+		</aside>
+		<article>

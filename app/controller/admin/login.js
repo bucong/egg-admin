@@ -47,6 +47,11 @@ class LoginController extends BaseController {
     this.ctx.response.type = 'image/svg+xml';
     this.ctx.body = captcha.data;
   }
+  // 退出登录
+  async loginOut() {
+    this.ctx.session.adminInfo = null;
+    this.ctx.redirect('/admin/login')
+  }
 }
 
 module.exports = LoginController;
