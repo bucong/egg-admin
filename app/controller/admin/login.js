@@ -20,7 +20,6 @@ class LoginController extends BaseController {
       await this.error('/admin/login', '验证码不正确');
     }else{
       const result = await this.app.mysql.select('admin', {
-        columns: ['id', 'username', 'right'],
         where: {
           username,
           password: md5(password)

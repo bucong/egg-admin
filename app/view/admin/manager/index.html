@@ -2,17 +2,30 @@
 
 <div class="home">
 	<h1>管理员列表</h1>
-	<table class="table">
+	<table class="table table-hover">
 		<tr>
 			<th>管理员</th>
-			<th>权限</th>
+			<th>手机号</th>
+			<th>邮箱</th>
+			<th>角色</th>
+			<th>状态</th>
+			<th>创建时间</th>
+			<th>超级管理员</th>
 			<th>操作</th>
 		</tr>
 		<% for (let item of manager) { %>
 		<tr>
 			<td><%= item.username %></td>
-			<td><%= item.right %></td>
-			<td><a href="/admin/delete?model=admin&id=<%= item.id %>">删除</a></td>
+			<td><%= item.mobile %></td>
+			<td><%= item.email %></td>
+			<td><%= item.role_title %></td>
+			<td><%= item.status %></td>
+			<td><%= item.add_time %></td>
+			<td><%= item.is_super == 1 ? '是':'否' %></td>
+			<td>
+				<a href="/admin/manager/edit?id=<%= item.id %>">修改</a>
+				<a href="/admin/delete?model=admin&id=<%= item.id %>">删除</a>
+			</td>
 		</tr>
 		<% } %>
 	</table>
