@@ -3,11 +3,8 @@
 const Controller = require('egg').Controller;
 
 class HomeController extends Controller {
-  async index() {
-    await this.ctx.render('index')
-  }
-  notFound() {
-    this.ctx.body = '404';
+  async home() {
+    await this.ctx.render('admin/index/home')
   }
 }
 

@@ -1,0 +1,28 @@
+<%- include ../public/pageHeader.html %>
+
+<div class="home">
+	<h1>权限列表</h1>
+	<table class="table table-hover">
+		<tr>
+			<th>名称</th>
+			<th>描述</th>
+			<th>状态</th>
+			<th>创建时间</th>
+			<th>操作</th>
+		</tr>
+		<% for (let item of access) { %>
+		<!-- <tr>
+			<td><%= item.title %></td>
+			<td><%= item.description %></td>
+			<td><%= item.status %></td>
+			<td><%= item.add_time %></td>
+			<td>
+				<a href="/admin/role/edit?id=<%= item.id %>">修改</a>
+				<a href="/admin/delete?model=role&id=<%= item.id %>">删除</a>
+			</td>
+		</tr> -->
+		<% } %>
+	</table>
+</div>
+
+<%- include ../public/pageFooter.html %>

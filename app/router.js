@@ -18,7 +18,10 @@ module.exports = app => {
   router.get('/admin/delete', controller.admin.base.delete);
 
   // 后台主页
-  router.get('/admin', controller.admin.manager.index);
+  router.get('/admin', controller.admin.index.home);
+
+  // 管理员
+  router.get('/admin/manager', controller.admin.manager.index);
   router.get('/admin/manager/add', controller.admin.manager.add);
   router.post('/admin/manager/doAdd', controller.admin.manager.doAdd);
   router.get('/admin/manager/edit', controller.admin.manager.edit);
@@ -30,5 +33,15 @@ module.exports = app => {
   router.post('/admin/role/doAdd', controller.admin.role.doAdd);
   router.get('/admin/role/edit', controller.admin.role.edit);
   router.post('/admin/role/doEdit', controller.admin.role.doEdit);
+
+  // 权限
+  router.get('/admin/access', controller.admin.access.index);
+  router.get('/admin/access/add', controller.admin.access.add);
+  router.post('/admin/access/doAdd', controller.admin.access.doAdd);
+  router.get('/admin/access/edit', controller.admin.access.edit);
+  router.post('/admin/access/doEdit', controller.admin.access.doEdit);
+
+  // 404
+  router.get('*', controller.index.home.notFound);
 
 };
