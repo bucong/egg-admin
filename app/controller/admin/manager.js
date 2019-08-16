@@ -43,7 +43,7 @@ class ManagerController extends BaseController {
         role_id,
         add_time
       })
-      await this.success('/admin');
+      await this.success('/admin/manager');
     }
   }
   // 修改管理员页面
@@ -83,7 +83,7 @@ class ManagerController extends BaseController {
         id
       }
     })
-    await this.success('/admin');
+    await this.success('/admin/manager');
   }
 }
 

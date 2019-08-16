@@ -18,7 +18,7 @@
 			<td><%= item.add_time %></td>
 			<td>
 				<a href="/admin/role/edit?id=<%= item.id %>">修改</a>
-				<a href="/admin/delete?model=role&id=<%= item.id %>">删除</a>
+				<a class="delete" href="/admin/delete?model=role&id=<%= item.id %>">删除</a>
 			</td>
 		</tr>
 		<% } %>

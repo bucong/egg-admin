@@ -20,11 +20,11 @@
 			<td><%= item.email %></td>
 			<td><%= item.role_title %></td>
 			<td><%= item.status %></td>
-			<td><%= item.add_time %></td>
+			<td><%= helper.formatDate(item.add_time) %></td>
 			<td><%= item.is_super == 1 ? '是':'否' %></td>
 			<td>
 				<a href="/admin/manager/edit?id=<%= item.id %>">修改</a>
-				<a href="/admin/delete?model=admin&id=<%= item.id %>">删除</a>
+				<a class="delete" href="/admin/delete?model=admin&id=<%= item.id %>">删除</a>
 			</td>
 		</tr>
 		<% } %>

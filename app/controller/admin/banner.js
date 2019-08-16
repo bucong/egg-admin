@@ -19,7 +19,6 @@ class BannerController extends BaseController {
       url: target,
       fields: stream.fields
     }
-
   }
 }
 
