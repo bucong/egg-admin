@@ -167,8 +167,10 @@ header{
 	.logo{
 		font-size: 20px;
 	}
-	a{
-		color: #fff;
+	.admin-info{
+		a{
+			color: #fff;
+		}
 	}
 }
 .content-box{
@@ -184,8 +186,11 @@ aside{
 			font-size: 18px;
 			background: #3f87c5;
 			padding-left: 20px;
+			color: #fff;
 		}
 		ul{
+			overflow: hidden;
+			transition: 1s;
 			li{
 				font-size: 16px;
 				line-height: 36px;
@@ -196,14 +201,17 @@ aside{
 				}
 			}
 		}
+		.hide-list{
+			height: 0;
+		}
 	}
 }
 article{
 	flex: 1;
 	padding-right: 30px;
-	h1{
-		font-size: 30px;
-		line-height: 50px;
-		margin-bottom: 20px;
-	}
+}
+h1{
+	font-size: 30px;
+	line-height: 50px;
+	margin-bottom: 20px;
 }

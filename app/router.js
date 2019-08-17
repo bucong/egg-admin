@@ -8,6 +8,9 @@ module.exports = app => {
   // 前端首页
   router.get('/', controller.index.home.index);
 
+  // 后台
+  router.get('/admin', controller.admin.main.index);
+
   // 后台登录
   router.get('/admin/login', controller.admin.login.login);
   router.get('/admin/verify', controller.admin.login.verify);
@@ -16,9 +19,11 @@ module.exports = app => {
 
   // 公共删除方法
   router.get('/admin/delete', controller.admin.base.delete);
+  // 公共修改状态方法
+  router.get('/admin/changeStatus', controller.admin.base.changeStatus);
 
-  // 后台主页
-  router.get('/admin', controller.admin.home.index);
+  // 后台欢迎页
+  router.get('/admin/welcome', controller.admin.home.index);
 
   // 管理员
   router.get('/admin/manager', controller.admin.manager.index);
@@ -38,7 +43,14 @@ module.exports = app => {
   router.get('/admin/banner', controller.admin.banner.index);
   router.post('/admin/banner/upload', controller.admin.banner.upload);
 
+  // 商品类型
+  router.get('/admin/goodsType', controller.admin.goodsType.index);
+  router.get('/admin/goodsType/add', controller.admin.goodsType.add);
+  router.post('/admin/goodsType/doAdd', controller.admin.goodsType.doAdd);
+  router.get('/admin/goodsType/edit', controller.admin.goodsType.edit);
+  router.post('/admin/goodsType/doEdit', controller.admin.goodsType.doEdit);
+
   // 404
-  router.get('*', controller.index.home.notFound);
+  router.get('*', controller.admin.main.notFound);
 
 };

@@ -26,8 +26,13 @@ class LoginController extends BaseController {
         }
       })
       if(result.length > 0){
-        this.ctx.session.adminInfo = result[0];
-        await this.success();
+        let adminInfo = result[0];
+        if(adminInfo.status == 1){
+          this.ctx.session.adminInfo = adminInfo;
+          await this.success('/admin');
+        }else{
+          await this.error('/admin/login', '您已被禁止访问，请联系管理员');
+        }
       }else{
         await this.error('/admin/login', '用户名或密码错误');
       }
@@ -36,7 +41,7 @@ class LoginController extends BaseController {
   // 验证码
   async verify() {
     let captcha = svgCaptcha.create({
-      size: 6,
+      size: 4,
       fontSize: 50,
       width: 100,
       height: 40,

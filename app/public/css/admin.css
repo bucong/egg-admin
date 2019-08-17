@@ -256,7 +256,7 @@ header {
 header .logo {
   font-size: 20px;
 }
-header a {
+header .admin-info a {
   color: #fff;
 }
 .content-box {
@@ -272,6 +272,11 @@ aside .nav-item h2 {
   font-size: 18px;
   background: #3f87c5;
   padding-left: 20px;
+  color: #fff;
+}
+aside .nav-item ul {
+  overflow: hidden;
+  transition: 1s;
 }
 aside .nav-item ul li {
   font-size: 16px;
@@ -282,11 +287,14 @@ aside .nav-item ul li {
 aside .nav-item ul li a {
   color: #000;
 }
+aside .nav-item .hide-list {
+  height: 0;
+}
 article {
   flex: 1;
   padding-right: 30px;
 }
-article h1 {
+h1 {
   font-size: 30px;
   line-height: 50px;
   margin-bottom: 20px;

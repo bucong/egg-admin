@@ -1,0 +1,45 @@
+<%- include ../public/pageHeader.html %>
+<header>
+  <div class="flex">
+    <div class="logo">后台管理</div>
+    <div class="admin-info">
+      <span><%=adminInfo.username%></span>
+      <a href="/admin/loginOut">退出</a>
+    </div>
+  </div>
+</header>
+<div class="content-box">
+  <aside>
+    <div class="nav-item">
+      <h2>管理员管理</h2>
+      <ul>
+        <li><a href="/admin/manager" target="rightMain">管理员列表</a></li>
+        <li><a href="/admin/manager/add" target="rightMain">添加管理员</a></li>
+      </ul>
+    </div>
+    <div class="nav-item">
+      <h2>角色管理</h2>
+      <ul>
+        <li><a href="/admin/role" target="rightMain">角色列表</a></li>
+        <li><a href="/admin/role/add" target="rightMain">添加角色</a></li>
+      </ul>
+    </div>
+    <div class="nav-item">
+      <h2>轮播图管理</h2>
+      <ul>
+        <li><a href="/admin/banner" target="rightMain">上传图片</a></li>
+      </ul>
+    </div>
+    <div class="nav-item">
+      <h2>商品管理</h2>
+      <ul>
+        <li><a href="/admin/goodsType" target="rightMain">商品类型</a></li>
+      </ul>
+    </div>
+  </aside>
+  <article>
+    <iframe name="rightMain" id="rightMain" src="/admin/welcome" frameborder="false" scrolling="auto" width="100%"></iframe>
+  </article>
+</div>
+
+<%- include ../public/pageFooter.html %>
