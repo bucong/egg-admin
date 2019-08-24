@@ -50,6 +50,13 @@ module.exports = app => {
   router.get('/admin/goodsType/edit', controller.admin.goodsType.edit);
   router.post('/admin/goodsType/doEdit', controller.admin.goodsType.doEdit);
 
+  // 支付
+  router.get('/pay', controller.api.pay.index); // 支付页面（临时）
+  router.get('/pay/payReturn', controller.api.pay.payReturn); // 支付回调页面（临时）
+  // 阿里支付
+  router.post('/pay/doAlipay', controller.api.pay.doAlipay);
+  router.post('/pay/alipayNotify', controller.api.pay.alipayNotify);
+
   // 404
   router.get('*', controller.admin.main.notFound);
 

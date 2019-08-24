@@ -4,6 +4,7 @@
   "description": "",
   "private": true,
   "dependencies": {
+    "alipay-mobile": "^2.2.7",
     "await-stream-ready": "^1.0.1",
     "egg": "^2.2.1",
     "egg-cors": "^2.1.1",
