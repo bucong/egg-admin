@@ -13,9 +13,10 @@ class PayController extends Controller {
   }
   // 支付宝支付
   async doAlipay() {
+    let order_no = (new Date()).getTime();
     let data = {
       subject: '聪哥的egg',
-      out_trade_no: '456123789',
+      out_trade_no: order_no.toString(),
       total_amount: '0.01'
     }
     let url = await this.service.alipay.doAlipay(data);

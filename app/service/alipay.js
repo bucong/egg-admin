@@ -10,7 +10,6 @@ class AlipayService extends Service {
       const service = new Alipay(this.config.alipayOptions);
       service.createPageOrderURL(orderData, this.config.alipayBasicParams)
       .then(res => {
-        console.log(res)
         resolve(res.data)
       })
     })

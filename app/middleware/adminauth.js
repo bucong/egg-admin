@@ -1,3 +1,4 @@
+// 后台管理权限
 let url = require('url'); // 解析路由path
 module.exports = options => {
   return async function adminauth(ctx, next) {

@@ -74,7 +74,7 @@ module.exports = appInfo => {
 
   config.alipayBasicParams={
     return_url: 'http://47.100.51.191:3000/pay/payReturn', //支付成功返回地址
-    notify_url: 'http://47.100.51.191:3000/pay/alipayNotify' //支付成功异步通知地址
+    notify_url: 'http://47.100.51.191:3000/api/pay/alipayNotify' //支付成功异步通知地址
   }
 
   return config;
