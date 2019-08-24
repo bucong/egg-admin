@@ -8,6 +8,16 @@
 </head>
 <body>
   <form action="/api/pay/doAlipay" method="POST">
+    <h3>商品名称</h3>
+    <input type="text" name="subject" value="聪哥的egg" />
+    <h3>商品价格</h3>
+    <input type="text" name="total_amount" value="0.01" />
+    <h3>支付方式</h3>
+    <select name="pay_type">
+      <option value="1">PC</option>
+      <option value="2">mobile</option>
+    </select>
+    <h3></h3>
     <button type="submit" class="btn btn-primary">支付宝支付</button>
   </form>
 </body>
