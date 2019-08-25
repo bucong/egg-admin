@@ -1,0 +1,40 @@
+<%- include ../public/pageHeader.html %>
+
+<div class="iframe-content">
+	<h1 class="flex">
+		<span>商品分类</span>
+		<a href="/admin/goodsCate/add" class="btn btn-primary">添加商品分类</a>
+	</h1>
+	<table class="table table-hover">
+		<tr>
+			<th>名称</th>
+			<th>图片</th>
+			<th>分类属性</th>
+			<th>链接</th>
+			<th>模板</th>
+			<th>seo标题</th>
+			<th>seo关键词</th>
+			<th>seo简介</th>
+			<th>创建时间</th>
+			<th>操作</th>
+		</tr>
+		<% for (let item of goodsCate) { %>
+		<tr>
+			<td><%= item.pid != 0 ? "　　":"" %><%= item.title %></td>
+			<td><img src="<%= item.cate_img %>" width="120px" alt=""></td>
+			<td><%= item.filter_attr %></td>
+			<td><%= item.link %></td>
+			<td><%= item.template %></td>
+			<td><%= item.seo_title %></td>
+			<td><%= item.seo_keywords %></td>
+			<td><%= item.seo_description %></td>
+			<td><%= helper.formatDate(item.add_time) %></td>
+			<td>
+				<a class="btn btn-danger delete" href="/admin/delete?model=goods_cate&id=<%= item.id %>">删除</a>
+			</td>
+		</tr>
+		<% } %>
+	</table>
+</div>
+
+<%- include ../public/pageFooter.html %>

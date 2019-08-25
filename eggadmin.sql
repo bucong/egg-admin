@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50633
 File Encoding         : 65001
 
-Date: 2019-08-17 23:53:11
+Date: 2019-08-25 23:08:54
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -62,10 +62,56 @@ INSERT INTO `admin` VALUES ('4', 'admin', 'e10adc3949ba59abbe56e057f20f883e', '1
 INSERT INTO `admin` VALUES ('6', 'jack123', 'e10adc3949ba59abbe56e057f20f883e', '17629283762', '384747@qq.com', '0', '6', '1566029128667', '0');
 
 -- ----------------------------
--- Table structure for goodstype
+-- Table structure for banner
 -- ----------------------------
-DROP TABLE IF EXISTS `goodstype`;
-CREATE TABLE `goodstype` (
+DROP TABLE IF EXISTS `banner`;
+CREATE TABLE `banner` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `img_url` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `path` varchar(255) DEFAULT NULL,
+  `type` int(2) DEFAULT '1' COMMENT '1内部链接，2外部链接',
+  `add_time` varchar(255) DEFAULT NULL,
+  `sort` int(5) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of banner
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for goods_cate
+-- ----------------------------
+DROP TABLE IF EXISTS `goods_cate`;
+CREATE TABLE `goods_cate` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL,
+  `cate_img` varchar(255) DEFAULT NULL,
+  `filter_attr` varchar(255) DEFAULT NULL,
+  `link` varchar(255) DEFAULT NULL,
+  `pid` int(10) DEFAULT '0',
+  `template` varchar(255) DEFAULT NULL,
+  `seo_title` varchar(255) DEFAULT NULL,
+  `seo_keywords` varchar(255) DEFAULT NULL,
+  `seo_description` varchar(255) DEFAULT NULL,
+  `add_time` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of goods_cate
+-- ----------------------------
+INSERT INTO `goods_cate` VALUES ('3', '商品管理', '/public/admin/upload/1566729657542749p5yzue05.gif', '4321', '5432', '0', '5432', '5432', '4321', 'treetre', '1566729657543');
+INSERT INTO `goods_cate` VALUES ('6', '网站运维', '/public/admin/upload/1566730617407rdujgvb9f9b.jpg', '4321', '432', '0', '342', '555', '666', '777', '1566730617407');
+INSERT INTO `goods_cate` VALUES ('8', '二级分类', '/public/admin/upload/1566743161877yh54f6ooqvq.jpg', '43', '/uyruwie?id=21', '3', '二七王', '453', '惹我', '太热我以为', '1566743161877');
+INSERT INTO `goods_cate` VALUES ('9', '还是二级', '/public/admin/upload/1566743671054vnn280xpdjd.jpg', '4321', '5432', '3', '5454', '二维瑞特', '与他人', '一天热一热', '1566743671055');
+
+-- ----------------------------
+-- Table structure for goods_type
+-- ----------------------------
+DROP TABLE IF EXISTS `goods_type`;
+CREATE TABLE `goods_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
@@ -75,10 +121,9 @@ CREATE TABLE `goodstype` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of goodstype
+-- Records of goods_type
 -- ----------------------------
-INSERT INTO `goodstype` VALUES ('2', '笔记本', '便携式电脑', '1', '1566051066959');
-INSERT INTO `goodstype` VALUES ('3', '台式机', '台式电脑', '1', '1566052473072');
+INSERT INTO `goods_type` VALUES ('2', '笔记本', '便携式电脑', '1', '1566051066959');
 
 -- ----------------------------
 -- Table structure for role

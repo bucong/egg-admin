@@ -4,7 +4,7 @@ const BaseController = require('./base');
 
 class GoodsTypeController extends BaseController {
   async index() {
-    const result = await this.app.mysql.select('goodsType');
+    const result = await this.app.mysql.select('goods_type');
     await this.ctx.render('admin/goodsType/index', {
       goodsType: result
     })
@@ -20,7 +20,7 @@ class GoodsTypeController extends BaseController {
     let description = this.ctx.request.body.description;
     let add_time = (new Date()).getTime();
     // 判断商品类型名是否存在
-    let result = await this.app.mysql.select('goodsType', {
+    let result = await this.app.mysql.select('goods_type', {
       where: {
         title
       }
@@ -28,7 +28,7 @@ class GoodsTypeController extends BaseController {
     if (result.length > 0) {
       await this.error('/admin/goodsType/add', '该商品类型名已存在');
     } else {
-      await this.app.mysql.insert('goodsType', {
+      await this.app.mysql.insert('goods_type', {
         title, description, add_time
       })
       await this.success('/admin/goodsType');
@@ -37,7 +37,7 @@ class GoodsTypeController extends BaseController {
   // 修改商品类型页面
   async edit() {
     let id = this.ctx.request.query.id;
-    let result = await this.app.mysql.select('goodsType', {
+    let result = await this.app.mysql.select('goods_type', {
       where: {
         id: id
       }
@@ -51,7 +51,7 @@ class GoodsTypeController extends BaseController {
     let id = this.ctx.request.body.id;
     let title = this.ctx.request.body.title;
     let description = this.ctx.request.body.description;
-    await this.app.mysql.update('goodsType', {
+    await this.app.mysql.update('goods_type', {
       title, description
     }, {
       where: {

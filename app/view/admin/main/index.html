@@ -1,7 +1,7 @@
 <%- include ../public/pageHeader.html %>
 <header>
   <div class="flex">
-    <div class="logo">后台管理</div>
+    <div class="logo">商城管理系统</div>
     <div class="admin-info">
       <span><%=adminInfo.username%></span>
       <a href="/admin/loginOut">退出</a>
@@ -27,13 +27,15 @@
     <div class="nav-item">
       <h2>轮播图管理</h2>
       <ul>
-        <li><a href="/admin/banner" target="rightMain">上传图片</a></li>
+        <li><a href="/admin/banner" target="rightMain">轮播图列表</a></li>
+        <li><a href="/admin/banner/add" target="rightMain">添加轮播图</a></li>
       </ul>
     </div>
     <div class="nav-item">
       <h2>商品管理</h2>
       <ul>
         <li><a href="/admin/goodsType" target="rightMain">商品类型</a></li>
+        <li><a href="/admin/goodsCate" target="rightMain">商品分类</a></li>
       </ul>
     </div>
   </aside>

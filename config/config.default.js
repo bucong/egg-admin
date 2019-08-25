@@ -9,7 +9,7 @@ module.exports = appInfo => {
 
   config.session = {
     key: 'SESSION_ID',
-    maxAge: 864000, // 过期时间
+    maxAge: 3600000, // 过期时间
     httpOnly: true, // 只有服务端可访问
     encrypt: true, // 加密
     renew: true // 延长回话周期
@@ -49,6 +49,11 @@ module.exports = appInfo => {
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH'
   };
   
+  // 配置表单可提交数量
+  config.multipart = {
+    fields: '50',
+  };
+
   //配置数据库
   config.mysql = {
     client: {

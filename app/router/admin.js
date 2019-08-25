@@ -34,7 +34,8 @@ module.exports = app => {
 
   // 轮播图
   router.get('/admin/banner', controller.admin.banner.index);
-  router.post('/admin/banner/upload', controller.admin.banner.upload);
+  router.get('/admin/banner/add', controller.admin.banner.add);
+  router.post('/admin/banner/doAdd', controller.admin.banner.doAdd);
 
   // 商品类型
   router.get('/admin/goodsType', controller.admin.goodsType.index);
@@ -42,4 +43,9 @@ module.exports = app => {
   router.post('/admin/goodsType/doAdd', controller.admin.goodsType.doAdd);
   router.get('/admin/goodsType/edit', controller.admin.goodsType.edit);
   router.post('/admin/goodsType/doEdit', controller.admin.goodsType.doEdit);
+
+  // 商品分类
+  router.get('/admin/goodsCate', controller.admin.goodsCate.index);
+  router.get('/admin/goodsCate/add', controller.admin.goodsCate.add);
+  router.post('/admin/goodsCate/doAdd', controller.admin.goodsCate.doAdd);
 };

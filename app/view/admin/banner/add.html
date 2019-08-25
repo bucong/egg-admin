@@ -1,0 +1,33 @@
+<%- include ../public/pageHeader.html %>
+
+<div class="iframe-content">
+  <h1>添加轮播图</h1>
+  <form action="/admin/banner/doAdd?_csrf=<%= csrf %>" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="path">跳转地址(不填则不跳转)</label>
+      <input type="text" class="form-control" id="path" name="path" />
+    </div>
+    <div class="form-group">
+      <label for="description">描述</label>
+      <input type="text" class="form-control" id="description" name="description" required />
+    </div>
+    <div class="form-group">
+      <label for="type">跳转类型</label>
+      <select name="type" id="type" class="form-control">
+        <option value="1">内部链接</option>
+        <option value="2">外部链接</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="sort">排序(升序)</label>
+      <input type="number" class="form-control" id="sort" value="100" name="sort" required />
+    </div>
+    <div class="form-group">
+      <label for="banner">轮播图</label>
+      <input type="file" id="banner" name="banner" required />
+    </div>
+    <button type="submit" class="btn btn-primary">提交</button>
+  </form>
+</div>
+
+<%- include ../public/pageFooter.html %>

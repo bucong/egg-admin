@@ -264,7 +264,6 @@ header .admin-info a {
 }
 aside {
   width: 180px;
-  margin-right: 20px;
   border-right: 1px solid #eee;
 }
 aside .nav-item h2 {
@@ -292,10 +291,15 @@ aside .nav-item .hide-list {
 }
 article {
   flex: 1;
-  padding-right: 30px;
 }
-h1 {
+.iframe-content {
+  padding: 0 30px;
+}
+.iframe-content h1 {
   font-size: 30px;
   line-height: 50px;
   margin-bottom: 20px;
+}
+.table td {
+  vertical-align: middle !important;
 }
