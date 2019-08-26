@@ -1,0 +1,29 @@
+<%- include ../public/pageHeader.html %>
+
+<div class="iframe-content">
+	<h1 class="flex">
+		<span>商品列表</span>
+		<a href="/admin/goods/add" class="btn btn-primary">添加商品</a>
+	</h1>
+	<table class="table table-hover">
+		<tr>
+			<th>名称</th>
+			<th>描述</th>
+			<th>创建时间</th>
+			<th>操作</th>
+		</tr>
+		<% for (let item of goods) { %>
+		<tr>
+			<td><%= item.title %></td>
+			<td><%= item.description %></td>
+			<td><%= helper.formatDate(item.add_time) %></td>
+			<td>
+				<a class="btn btn-primary" href="/admin/goods/edit?id=<%= item.id %>">修改</a>
+				<a class="btn btn-danger delete" href="/admin/delete?model=goods&id=<%= item.id %>">删除</a>
+			</td>
+		</tr>
+		<% } %>
+	</table>
+</div>
+
+<%- include ../public/pageFooter.html %>

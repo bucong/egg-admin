@@ -48,4 +48,12 @@ module.exports = app => {
   router.get('/admin/goodsCate', controller.admin.goodsCate.index);
   router.get('/admin/goodsCate/add', controller.admin.goodsCate.add);
   router.post('/admin/goodsCate/doAdd', controller.admin.goodsCate.doAdd);
+
+  // 商品
+  router.get('/admin/goods', controller.admin.goods.index);
+  router.get('/admin/goods/add', controller.admin.goods.add);
+  router.post('/admin/goods/editorUpload', controller.admin.goods.editorUpload);
+  router.post('/admin/goods/doAdd', controller.admin.goods.doAdd);
+  router.get('/admin/goods/edit', controller.admin.goods.edit);
+  router.post('/admin/goods/doEdit', controller.admin.goods.doEdit);
 };

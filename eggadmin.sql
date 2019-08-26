@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50633
 File Encoding         : 65001
 
-Date: 2019-08-25 23:08:54
+Date: 2019-08-26 23:35:35
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -74,10 +74,31 @@ CREATE TABLE `banner` (
   `add_time` varchar(255) DEFAULT NULL,
   `sort` int(5) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of banner
+-- ----------------------------
+INSERT INTO `banner` VALUES ('6', '/public/admin/upload/156683160673853hu12wuf0m.jpg', '博客地址', 'https://blog.csdn.net/bocongbo/article/details/83656754', '1', '1566831606739', '100');
+
+-- ----------------------------
+-- Table structure for goods
+-- ----------------------------
+DROP TABLE IF EXISTS `goods`;
+CREATE TABLE `goods` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL,
+  `desc` varchar(255) DEFAULT NULL,
+  `price` float(10,0) DEFAULT NULL COMMENT '缩略图',
+  `thumbnail` varchar(255) DEFAULT NULL,
+  `img_list` longtext,
+  `content` longtext,
+  `add_time` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of goods
 -- ----------------------------
 
 -- ----------------------------
