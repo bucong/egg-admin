@@ -44,6 +44,13 @@ module.exports = app => {
   router.get('/admin/goodsType/edit', controller.admin.goodsType.edit);
   router.post('/admin/goodsType/doEdit', controller.admin.goodsType.doEdit);
 
+  // 商品类型属性
+  router.get('/admin/goodsTypeAttr', controller.admin.goodsTypeAttr.index);
+  router.get('/admin/goodsTypeAttr/add', controller.admin.goodsTypeAttr.add);
+  router.post('/admin/goodsTypeAttr/doAdd', controller.admin.goodsTypeAttr.doAdd);
+  router.get('/admin/goodsTypeAttr/edit', controller.admin.goodsTypeAttr.edit);
+  router.post('/admin/goodsTypeAttr/doEdit', controller.admin.goodsTypeAttr.doEdit);
+
   // 商品分类
   router.get('/admin/goodsCate', controller.admin.goodsCate.index);
   router.get('/admin/goodsCate/add', controller.admin.goodsCate.add);

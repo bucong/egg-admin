@@ -1,0 +1,39 @@
+<%- include ../public/pageHeader.html %>
+
+<div class="iframe-content">
+	<h1 class="flex">
+		<span>商品类型属性</span>
+		<a href="/admin/goodsTypeAttr/add?cate_id=<%= cate_id %>" class="btn btn-primary">添加商品类型属性</a>
+	</h1>
+	<table class="table table-hover">
+		<tr>
+			<th>名称</th>
+			<th>输入类型</th>
+			<th>可选项</th>
+			<th>创建时间</th>
+			<th>操作</th>
+		</tr>
+		<% for (let item of goodsTypeAttr) { %>
+		<tr>
+			<td><%= item.title %></td>
+			<td>
+				<% if(item.attr_type==1) { %>
+					单行文本框
+				<% } else if(item.attr_type==2) { %>
+					多行文本框
+				<% } else { %>
+					选择框
+				<% } %>
+			</td>
+			<td><%= item.attr_value %></td>
+			<td><%= helper.formatDate(item.add_time) %></td>
+			<td>
+				<a class="btn btn-primary" href="/admin/goodsTypeAttr/edit?id=<%= item.id %>">修改</a>
+				<a class="btn btn-danger delete" href="/admin/delete?model=goods_type_attr&id=<%= item.id %>">删除</a>
+			</td>
+		</tr>
+		<% } %>
+	</table>
+</div>
+
+<%- include ../public/pageFooter.html %>

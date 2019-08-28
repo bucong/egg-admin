@@ -18,6 +18,7 @@
 			<td><%= item.description %></td>
 			<td><%= helper.formatDate(item.add_time) %></td>
 			<td>
+				<a class="btn btn-primary" href="/admin/goodsTypeAttr?cate_id=<%= item.id %>">属性列表</a>
 				<a class="btn btn-primary" href="/admin/goodsType/edit?id=<%= item.id %>">修改</a>
 				<a class="btn btn-danger delete" href="/admin/delete?model=goods_type&id=<%= item.id %>">删除</a>
 			</td>

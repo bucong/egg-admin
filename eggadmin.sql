@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50633
 File Encoding         : 65001
 
-Date: 2019-08-26 23:35:35
+Date: 2019-08-29 00:10:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -139,12 +139,35 @@ CREATE TABLE `goods_type` (
   `status` int(1) DEFAULT '1',
   `add_time` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of goods_type
 -- ----------------------------
 INSERT INTO `goods_type` VALUES ('2', '笔记本', '便携式电脑', '1', '1566051066959');
+INSERT INTO `goods_type` VALUES ('4', '手机', '移动手机', '1', '1567006620689');
+
+-- ----------------------------
+-- Table structure for goods_type_attr
+-- ----------------------------
+DROP TABLE IF EXISTS `goods_type_attr`;
+CREATE TABLE `goods_type_attr` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cate_id` int(11) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `attr_type` int(2) DEFAULT NULL,
+  `attr_value` varchar(255) DEFAULT NULL,
+  `add_time` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of goods_type_attr
+-- ----------------------------
+INSERT INTO `goods_type_attr` VALUES ('1', '2', '内存', '3', '8G\r\n4G', '1567006245489');
+INSERT INTO `goods_type_attr` VALUES ('2', '2', '硬盘', '3', '512G\r\n1T', '1567006529384');
+INSERT INTO `goods_type_attr` VALUES ('3', '2', '分辨率', '3', '1336*780\r\n1920*1080', '1567006586922');
+INSERT INTO `goods_type_attr` VALUES ('4', '4', '型号', '1', null, '1567006668941');
 
 -- ----------------------------
 -- Table structure for role

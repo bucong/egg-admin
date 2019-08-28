@@ -11,7 +11,10 @@ class GoodsController extends BaseController {
   }
   // 添加商品页面
   async add() {
-    await this.ctx.render('admin/goods/add')
+    let goodsType = await this.app.mysql.select('goods_type');
+    await this.ctx.render('admin/goods/add', {
+      goodsType
+    })
   }
   // 添加富文本图片
   async editorUpload() {
