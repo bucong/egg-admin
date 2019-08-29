@@ -1,20 +1,20 @@
-<%- include ../public/pageHeader.html %>
+{% include "../public/pageHeader.html" %}
 
 <div class="iframe-content">
   <h1>修改角色</h1>
   <form method="post" action="/admin/role/doEdit">
-    <input type="hidden" name="_csrf" value="<%= csrf %>">
-    <input type="hidden" name="id" value="<%= role.id %>">
+    <input type="hidden" name="_csrf" value="{{ csrf }}">
+    <input type="hidden" name="id" value="{{ role.id }}">
     <div class="form-group">
       <label for="title">名称</label>
-      <input type="text" class="form-control" id="title" name="title" value="<%= role.title %>" required />
+      <input type="text" class="form-control" id="title" name="title" value="{{ role.title }}" required />
     </div>
     <div class="form-group">
       <label for="description">描述</label>
-      <textarea class="form-control" rows="3" id="description" name="description" required><%= role.description %></textarea>
+      <textarea class="form-control" rows="3" id="description" name="description" required>{{ role.description }}</textarea>
     </div>
     <button type="submit" class="btn btn-primary">提交</button>
   </form>
 </div>
 
-<%- include ../public/pageFooter.html %>
+{% include "../public/pageFooter.html" %}

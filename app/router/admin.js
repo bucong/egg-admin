@@ -59,6 +59,7 @@ module.exports = app => {
   // 商品
   router.get('/admin/goods', controller.admin.goods.index);
   router.get('/admin/goods/add', controller.admin.goods.add);
+  router.get('/admin/goods/getTypeAttr', controller.admin.goods.getTypeAttr);
   router.post('/admin/goods/editorUpload', controller.admin.goods.editorUpload);
   router.post('/admin/goods/doAdd', controller.admin.goods.doAdd);
   router.get('/admin/goods/edit', controller.admin.goods.edit);

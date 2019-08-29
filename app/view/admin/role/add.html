@@ -1,9 +1,9 @@
-<%- include ../public/pageHeader.html %>
+{% include "../public/pageHeader.html" %}
 
 <div class="iframe-content">
   <h1>添加角色</h1>
   <form method="post" action="/admin/role/doAdd">
-    <input type="hidden" name="_csrf" value="<%= csrf %>">
+    <input type="hidden" name="_csrf" value="{{ csrf }}">
     <div class="form-group">
       <label for="title">名称</label>
       <input type="text" class="form-control" id="title" name="title" required />
@@ -16,4 +16,4 @@
   </form>
 </div>
 
-<%- include ../public/pageFooter.html %>
+{% include "../public/pageFooter.html" %}

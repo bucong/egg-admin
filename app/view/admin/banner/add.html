@@ -1,8 +1,8 @@
-<%- include ../public/pageHeader.html %>
+{% include "../public/pageHeader.html" %}
 
 <div class="iframe-content">
   <h1>添加轮播图</h1>
-  <form action="/admin/banner/doAdd?_csrf=<%= csrf %>" method="post" enctype="multipart/form-data">
+  <form action="/admin/banner/doAdd?_csrf={{ csrf }}" method="post" enctype="multipart/form-data">
     <div class="form-group">
       <label for="path">跳转地址(不填则不跳转)</label>
       <input type="text" class="form-control" id="path" name="path" />
@@ -30,4 +30,4 @@
   </form>
 </div>
 
-<%- include ../public/pageFooter.html %>
+{% include "../public/pageFooter.html" %}

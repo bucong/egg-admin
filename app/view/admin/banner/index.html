@@ -1,4 +1,4 @@
-<%- include ../public/pageHeader.html %>
+{% include "../public/pageHeader.html" %}
 
 <div class="iframe-content">
 	<h1>轮播图列表</h1>
@@ -12,26 +12,26 @@
 			<th>创建时间</th>
 			<th>操作</th>
 		</tr>
-		<% for (let item of banner) { %>
+		{% for item in banner %}
 		<tr>
 			<td>
-        <img src="<%= item.img_url %>" width="200px" alt="">
+        <img src="{{ item.img_url }}" width="200px" alt="">
       </td>
 			<td>
-        <p style="width: 240px;word-wrap: break-word">
-          <%= item.path != "" ? item.path:"不跳转" %>
+				<p style="width: 240px;word-wrap: break-word">
+					{{ item.path if item.path != "" else "不跳转" }}
         </p>
       </td>
-			<td><%= item.description %></td>
-			<td><%= item.type == 1 ? "内部链接":"外部链接" %></td>
-			<td><%= item.sort %></td>
-			<td><%= helper.formatDate(item.add_time) %></td>
+			<td>{{ item.description }}</td>
+			<td>{{ "内部链接" if item.type == 1 else "外部链接" }}</td>
+			<td>{{ item.sort }}</td>
+			<td>{{ helper.formatDate(item.add_time) }}</td>
 			<td>
-				<a class="btn btn-danger delete" href="/admin/delete?model=banner&id=<%= item.id %>">删除</a>
+				<a class="btn btn-danger delete" href="/admin/delete?model=banner&id={{ item.id }}">删除</a>
 			</td>
 		</tr>
-		<% } %>
+		{% endfor %}
 	</table>
 </div>
 
-<%- include ../public/pageFooter.html %>
+{% include "../public/pageFooter.html" %}

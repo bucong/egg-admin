@@ -1,4 +1,4 @@
-<%- include ../public/pageHeader.html %>
+{% include "../public/pageHeader.html" %}
 
 <div class="iframe-content">
 	<h1>角色列表</h1>
@@ -9,18 +9,18 @@
 			<th>创建时间</th>
 			<th>操作</th>
 		</tr>
-		<% for (let item of role) { %>
+		{% for (let item of role) { }}
 		<tr>
-			<td><%= item.title %></td>
-			<td><%= item.description %></td>
-			<td><%= helper.formatDate(item.add_time) %></td>
+			<td>{{ item.title }}</td>
+			<td>{{ item.description }}</td>
+			<td>{{ helper.formatDate(item.add_time) }}</td>
 			<td>
-				<a class="btn btn-primary" href="/admin/role/edit?id=<%= item.id %>">修改</a>
-				<a class="btn btn-danger delete" href="/admin/delete?model=role&id=<%= item.id %>">删除</a>
+				<a class="btn btn-primary" href="/admin/role/edit?id={{ item.id }}">修改</a>
+				<a class="btn btn-danger delete" href="/admin/delete?model=role&id={{ item.id }}">删除</a>
 			</td>
 		</tr>
-		<% } %>
+		{% } }}
 	</table>
 </div>
 
-<%- include ../public/pageFooter.html %>
+{% include "../public/pageFooter.html" %}

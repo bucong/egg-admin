@@ -1,9 +1,9 @@
-<%- include ../public/pageHeader.html %>
+{% include "../public/pageHeader.html" %}
 
 <div class="iframe-content">
   <h1>添加管理员</h1>
   <form method="post" action="/admin/manager/doAdd">
-    <input type="hidden" name="_csrf" value="<%= csrf %>">
+    <input type="hidden" name="_csrf" value="{{ csrf }}">
     <div class="form-group">
       <label for="username">用户名</label>
       <input type="text" class="form-control" id="username" name="username" required />
@@ -23,13 +23,13 @@
     <div class="form-group">
       <label for="role">角色</label>
       <select class="form-control" name="role_id">
-        <% for(let item of role) { %>
-        <option value="<%= item.id %>"><%= item.title %></option>
-        <% } %>
+        {% for(let item of role) { }}
+        <option value="{{ item.id }}">{{ item.title }}</option>
+        {% } }}
       </select>
     </div>
     <button type="submit" class="btn btn-primary">提交</button>
   </form>
 </div>
 
-<%- include ../public/pageFooter.html %>
+{% include "../public/pageFooter.html" %}

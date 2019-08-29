@@ -21,9 +21,12 @@ module.exports = appInfo => {
     match: '/admin'
   }
 
-  //配置ejs模板引擎，使用.html文件
+  //配置nunjucks模板引擎，使用.html文件
   config.view = {
-    mapping: {'.html': 'ejs'} 
+    defaultViewEngine: 'nunjucks',
+    mapping: {
+      '.html': 'nunjucks',
+    },
   };
   
   //设置监听端口

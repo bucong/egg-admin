@@ -16,6 +16,19 @@ class GoodsController extends BaseController {
       goodsType
     })
   }
+  // 商品类型属性列表
+  async getTypeAttr() {
+    let cate_id = this.ctx.request.query.cate_id;
+    let typeAttr = await this.app.mysql.select('goods_type_attr', {
+      where: {
+        cate_id
+      }
+    })
+    this.ctx.body = {
+      code: 0,
+      data: typeAttr
+    }
+  }
   // 添加富文本图片
   async editorUpload() {
     let parts = this.ctx.multipart({ autoFields: true });

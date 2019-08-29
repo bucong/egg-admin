@@ -4,16 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta http-equiv="refresh" content="3;url=<%=redirectUrl%>">
+  <meta http-equiv="refresh" content="3;url={{redirectUrl}}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
   <title>失败</title>
 </head>
 <body>
   <div class="container">
     <div class="alert alert-danger">
-      <h2><%=msg%></h2>
+      <h2>{{msg}}</h2>
       <br />
-      <p><span id="interval">3</span>秒后自动跳转到指定链接。<a href="<%=redirectUrl%>">立即跳转</a></p>
+      <p><span id="interval">3</span>秒后自动跳转到指定链接。<a href="{{redirectUrl}}">立即跳转</a></p>
     </div>
   </div>
 </body>

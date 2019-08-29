@@ -1,10 +1,10 @@
-<%- include ../public/pageHeader.html %>
+{% include "../public/pageHeader.html" %}
 
 <div class="iframe-content">
   <h1>添加商品类型属性</h1>
   <form method="post" action="/admin/goodsTypeAttr/doAdd">
-    <input type="hidden" name="_csrf" value="<%= csrf %>">
-    <input type="hidden" name="cate_id" value="<%= cate_id %>">
+    <input type="hidden" name="_csrf" value="{{ csrf }}">
+    <input type="hidden" name="cate_id" value="{{ cate_id }}">
     <div class="form-group">
       <label for="title">名称</label>
       <input type="text" class="form-control" id="title" name="title" required />
@@ -38,7 +38,7 @@
   </form>
 </div>
 
-<%- include ../public/pageFooter.html %>
+{% include "../public/pageFooter.html" %}
 <script>
   $("input[name='attr_type']").change(function(){
     if($(this).val() == 3){

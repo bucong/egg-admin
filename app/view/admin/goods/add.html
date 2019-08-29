@@ -1,10 +1,11 @@
-<%- include ../public/pageHeader.html %>
+{% include "../public/pageHeader.html" %}
+
 <link rel="stylesheet" href="../../../public/plugin/wangEditor/wangEditor.min.css">
 <link rel="stylesheet" href="../../../public/plugin/webuploader/css/diyUpload.css">
 <link rel="stylesheet" href="../../../public/plugin/webuploader/css/webuploader.css">
 <div class="iframe-content goods">
   <h1>添加商品</h1>
-  <form method="post" action="/admin/goods/doAdd?_csrf=<%= csrf %>" enctype="multipart/form-data">
+  <form method="post" action="/admin/goods/doAdd?_csrf={{ csrf }}" enctype="multipart/form-data">
     <ul class="nav nav-tabs">
       <li class="active"><a href="#general" data-toggle="tab">通用信息</a></li>
       <li><a href="#detail" data-toggle="tab">详细描述</a></li>
@@ -39,11 +40,12 @@
           <label for="goods_type_id">商品类型</label>
           <select class="form-control" name="goods_type_id" id="goods_type_id">
             <option value="">--请选择--</option>
-            <% for(let item of goodsType) { %>
-            <option value="<%= item.id %>"><%= item.title %></option>
-            <% } %>
+            {% for item in goodsType %}
+            <option value="{{ item.id }}">{{ item.title }}</option>
+            {% endfor %}
           </select>
         </div>
+        <div id="goods_type_attribute"></div>
       </div>
       <div class="tab-pane" id="photo">
         <div id="photoLib" class="photoLib"></div>
@@ -54,7 +56,7 @@
   </form>
 </div>
 
-<%- include ../public/pageFooter.html %>
+{% include "../public/pageFooter.html" %}
 <script src="../../../public/plugin/wangEditor/wangEditor.min.js"></script>
 <script src="../../../public/plugin/webuploader/js/webuploader.html5only.min.js"></script>
 <script src="../../../public/plugin/webuploader/js/diyUpload.js"></script>
@@ -63,25 +65,34 @@
   $('#goods_type_id').change(function () {
     var cate_id = $(this).val();
     var data = '';
-    $.get('/admin/goods/goodsTypeAttribute?cate_id=' + cate_id, function (response) {
-      console.log(response.result);
-      data = response.result;
-      console.log(data.length);
+    $.get('/admin/goods/getTypeAttr?cate_id=' + cate_id, function (res) {
+      console.log(res.data);
+      data = res.data;
       var str = "";
       for (var i = 0; i < data.length; i++) {
         if (data[i].attr_type == 1) {
-          str += '<li><span>' + data[i].title + ': 　</span><input type="hidden" name="attr_id_list" value="' + data[i]._id + '" />  <input type="text" name="attr_value_list" /></li>'
+          str += `<input type="hidden" name="attr_id_list" value="${data[i].id}" />
+          <div class="form-group">
+            <label>${data[i].title}</label>
+            <input type="text" class="form-control" name="attr_value_list" required />
+          </div>`
         } else if (data[i].attr_type == 2) {
-          str += '<li><span>' + data[i].title + ': 　</span> <input type="hidden" name="attr_id_list" value="' + data[i]._id + '">  <textarea cols="50" rows="3" name="attr_value_list"></textarea></li>'
+          str += `<input type="hidden" name="attr_id_list" value="${data[i].id}" />
+          <div class="form-group">
+            <label>${data[i].title}</label>
+            <textarea cols="50" rows="3" name="attr_value_list"></textarea>
+          </div>`
         } else {
           var arr = data[i].attr_value.split('\n');
-          str += '<li><span>' + data[i].title + ': 　</span><input type="hidden" name="attr_id_list" value="' + data[i]._id + '">';
-          str += '<select name="attr_value_list">';
+          str += `<input type="hidden" name="attr_id_list" value="${data[i].id}" />
+          <div class="form-group">
+            <label>${data[i].title}</label>
+            <select class="form-control" name="attr_value_list">`
           for (var j = 0; j < arr.length; j++) {
-            str += '<option value="' + arr[j] + '">' + arr[j] + '</option>';
+            str += `<option value="${arr[j]}">${arr[j]}</option>`
           }
-          str += '</select>';
-          str += '</li>';
+          str += `</select>
+          </div>`
         }
       }
       $('#goods_type_attribute').html(str);

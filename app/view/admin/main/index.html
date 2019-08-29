@@ -1,9 +1,9 @@
-<%- include ../public/pageHeader.html %>
+{% include "../public/pageHeader.html" %}
 <header>
   <div class="flex">
     <div class="logo">商城管理系统</div>
     <div class="admin-info">
-      <span><%=adminInfo.username%></span>
+      <span>{{ adminInfo.username }}</span>
       <a href="/admin/loginOut">退出</a>
     </div>
   </div>
@@ -73,4 +73,4 @@
   </article>
 </div>
 
-<%- include ../public/pageFooter.html %>
+{% include "../public/pageFooter.html" %}

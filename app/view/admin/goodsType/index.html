@@ -1,4 +1,4 @@
-<%- include ../public/pageHeader.html %>
+{% include "../public/pageHeader.html" %}
 
 <div class="iframe-content">
 	<h1 class="flex">
@@ -12,19 +12,19 @@
 			<th>创建时间</th>
 			<th>操作</th>
 		</tr>
-		<% for (let item of goodsType) { %>
+		{% for item in goodsType %}
 		<tr>
-			<td><%= item.title %></td>
-			<td><%= item.description %></td>
-			<td><%= helper.formatDate(item.add_time) %></td>
+			<td>{{ item.title }}</td>
+			<td>{{ item.description }}</td>
+			<td>{{ helper.formatDate(item.add_time) }}</td>
 			<td>
-				<a class="btn btn-primary" href="/admin/goodsTypeAttr?cate_id=<%= item.id %>">属性列表</a>
-				<a class="btn btn-primary" href="/admin/goodsType/edit?id=<%= item.id %>">修改</a>
-				<a class="btn btn-danger delete" href="/admin/delete?model=goods_type&id=<%= item.id %>">删除</a>
+				<a class="btn btn-primary" href="/admin/goodsTypeAttr?cate_id={{ item.id }}">属性列表</a>
+				<a class="btn btn-primary" href="/admin/goodsType/edit?id={{ item.id }}">修改</a>
+				<a class="btn btn-danger delete" href="/admin/delete?model=goods_type&id={{ item.id }}">删除</a>
 			</td>
 		</tr>
-		<% } %>
+		{% endfor %}
 	</table>
 </div>
 
-<%- include ../public/pageFooter.html %>
+{% include "../public/pageFooter.html" %}
