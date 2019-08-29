@@ -9,7 +9,7 @@
 			<th>创建时间</th>
 			<th>操作</th>
 		</tr>
-		{% for (let item of role) { }}
+		{% for item in role %}
 		<tr>
 			<td>{{ item.title }}</td>
 			<td>{{ item.description }}</td>
@@ -19,7 +19,7 @@
 				<a class="btn btn-danger delete" href="/admin/delete?model=role&id={{ item.id }}">删除</a>
 			</td>
 		</tr>
-		{% } }}
+		{% endfor %}
 	</table>
 </div>
 

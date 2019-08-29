@@ -24,9 +24,9 @@
     <div class="form-group">
       <label for="role">角色</label>
       <select class="form-control" name="role_id">
-        {% for(let item of role) { }}
-        <option value="{{ item.id }}" {{ manager.role_id == item.id ? 'selected':'' }}>{{ item.title }}</option>
-        {% } }}
+        {% for item in role %}
+        <option value="{{ item.id }}" {{ 'selected' if manager.role_id == item.id else '' }}>{{ item.title }}</option>
+        {% endfor %}
       </select>
     </div>
     <button type="submit" class="btn btn-primary">提交</button>

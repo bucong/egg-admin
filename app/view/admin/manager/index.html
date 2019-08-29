@@ -13,7 +13,7 @@
 			<th>超级管理员</th>
 			<th>操作</th>
 		</tr>
-		{% for (let item of manager) { }}
+		{% for item in manager %}
 		<tr>
 			<td>{{ item.username }}</td>
 			<td>{{ item.mobile }}</td>
@@ -21,19 +21,19 @@
 			<td>{{ item.role_title }}</td>
 			<td>{{ helper.formatDate(item.add_time) }}</td>
 			<td>
-				{% if(item.status == 1){}}
+				{% if item.status == 1 %}
 					<img src="../../../public/img/yes.gif" onclick="app.changeStatus(this,'admin','{{item.id}}')" alt="">
-				{%}else{}}
+				{% else %}
 					<img src="../../../public/img/no.gif" onclick="app.changeStatus(this,'admin','{{item.id}}')" alt="">
-				{%}}}
+				{% endif %}
 			</td>
-			<td>{{ item.is_super == 1 ? '是':'否' }}</td>
+			<td>{{ '是' if item.is_super == 1 else '否' }}</td>
 			<td>
 				<a class="btn btn-primary" href="/admin/manager/edit?id={{ item.id }}">修改</a>
 				<a class="btn btn-danger delete" href="/admin/delete?model=admin&id={{ item.id }}">删除</a>
 			</td>
 		</tr>
-		{% } }}
+		{% endfor %}
 	</table>
 </div>
 

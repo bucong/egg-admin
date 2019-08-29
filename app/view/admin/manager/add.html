@@ -23,9 +23,9 @@
     <div class="form-group">
       <label for="role">角色</label>
       <select class="form-control" name="role_id">
-        {% for(let item of role) { }}
+        {% for item in role %}
         <option value="{{ item.id }}">{{ item.title }}</option>
-        {% } }}
+        {% endfor %}
       </select>
     </div>
     <button type="submit" class="btn btn-primary">提交</button>
