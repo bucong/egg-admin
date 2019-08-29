@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50633
 File Encoding         : 65001
 
-Date: 2019-08-29 00:10:57
+Date: 2019-08-29 23:39:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -58,7 +58,7 @@ CREATE TABLE `admin` (
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
-INSERT INTO `admin` VALUES ('4', 'admin', 'e10adc3949ba59abbe56e057f20f883e', '17621960934', '531053266@qq.com', '1', '7', '1564068996262', '0');
+INSERT INTO `admin` VALUES ('4', 'admin', 'e10adc3949ba59abbe56e057f20f883e', '17621960934', '531053266@qq.com', '1', '7', '1564068996262', '1');
 INSERT INTO `admin` VALUES ('6', 'jack123', 'e10adc3949ba59abbe56e057f20f883e', '17629283762', '384747@qq.com', '0', '6', '1566029128667', '0');
 
 -- ----------------------------
@@ -88,12 +88,21 @@ DROP TABLE IF EXISTS `goods`;
 CREATE TABLE `goods` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
-  `desc` varchar(255) DEFAULT NULL,
+  `sub_title` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
   `price` float(10,0) DEFAULT NULL COMMENT '缩略图',
-  `thumbnail` varchar(255) DEFAULT NULL,
+  `original_price` float(10,0) DEFAULT NULL,
+  `thumbnail` varchar(255) DEFAULT NULL COMMENT '缩略图',
+  `cate_id` int(11) DEFAULT NULL,
+  `status` int(2) DEFAULT '1',
+  `is_best` int(2) DEFAULT NULL COMMENT '精品',
+  `is_hot` int(2) DEFAULT NULL COMMENT '热销',
+  `is_new` int(2) DEFAULT NULL COMMENT '新品',
   `img_list` longtext,
   `content` longtext,
   `add_time` varchar(255) DEFAULT NULL,
+  `seo_keywords` varchar(255) DEFAULT NULL,
+  `seo_desc` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

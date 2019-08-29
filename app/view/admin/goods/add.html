@@ -7,34 +7,84 @@
   <h1>添加商品</h1>
   <form method="post" action="/admin/goods/doAdd?_csrf={{ csrf }}" enctype="multipart/form-data">
     <ul class="nav nav-tabs">
-      <li class="active"><a href="#general" data-toggle="tab">通用信息</a></li>
+      <li class="active"><a href="#general" data-toggle="tab">基本信息</a></li>
       <li><a href="#detail" data-toggle="tab">详细描述</a></li>
       <li><a href="#attribute" data-toggle="tab">规格与包装</a></li>
+      <li><a href="#other" data-toggle="tab">其他信息</a></li>
       <li><a href="#photo" data-toggle="tab">商品相册</a></li>
     </ul>
     <div class="tab-content">
+      <!-- 基本信息 -->
       <div class="tab-pane active" id="general">
         <div class="form-group">
           <label for="title">名称</label>
           <input type="text" class="form-control" id="title" name="title" required />
         </div>
         <div class="form-group">
+          <label for="sub_title">附属标题</label>
+          <input type="text" class="form-control" id="sub_title" name="sub_title" />
+        </div>
+        <div class="form-group">
           <label for="price">价格</label>
           <input type="number" class="form-control" id="price" name="price" required />
         </div>
         <div class="form-group">
-          <label for="description">描述</label>
-          <textarea class="form-control" rows="3" id="description" name="description" required></textarea>
+          <label for="original_price">价格</label>
+          <input type="number" class="form-control" id="original_price" name="original_price" />
         </div>
         <div class="form-group">
-          <label for="goods_img">商品缩略图</label>
-          <input type="file" id="goods_img" name="goods_img" required />
+          <label for="thumbnail">商品缩略图</label>
+          <input type="file" id="thumbnail" name="thumbnail" required />
+        </div>
+        <div class="form-group">
+          <label for="cate_id">所属分类</label>
+          <select class="form-control" name="cate_id" id="cate_id">
+            {% for item in goodsCate %}
+            <option value="{{ item.id }}">{{ ("----" if item.pid != 0 else "") + item.title }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <label>状态</label>
+          <div class="radio">
+            <label>
+              <input type="radio" name="status" value="1" checked>
+              显示　　
+            </label>
+            <label>
+              <input type="radio" name="status" value="0" >
+              下架　　
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>加入推荐</label>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="is_best" value="1">
+              精品　　
+            </label>
+            <label>
+              <input type="checkbox" name="is_hot" value="1" >
+              热销　　
+            </label>
+            <label>
+              <input type="checkbox" name="is_new" value="1" >
+              新品　　
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="description">描述</label>
+          <textarea class="form-control" rows="3" id="description" name="description"></textarea>
         </div>
       </div>
+      <!-- 详细描述 -->
       <div class="tab-pane" id="detail">
         <div id="editor"></div>
         <textarea name="content" id="content" style="display: none"></textarea>
       </div>
+      <!-- 规格与包装 -->
       <div class="tab-pane" id="attribute">
         <div class="form-group">
           <label for="goods_type_id">商品类型</label>
@@ -47,6 +97,30 @@
         </div>
         <div id="goods_type_attribute"></div>
       </div>
+      <!-- 其他信息 -->
+      <div class="tab-pane" id="other">
+        <div class="form-group">
+          <label for="relation_goods">关联商品</label>
+          <input type="text" class="form-control" id="relation_goods" name="relation_goods" />
+        </div>
+        <div class="form-group">
+          <label for="goods_gift">关联赠品(格式：23-2,39-5 例如23-2中的23表示商品id,2表示数量)</label>
+          <input type="text" class="form-control" id="goods_gift" name="goods_gift" />
+        </div>
+        <div class="form-group">
+          <label for="goods_fitting">关联配件(格式：23-2,39-5 例如23-2中的23表示商品id,2表示数量)</label>
+          <input type="text" class="form-control" id="goods_fitting" name="goods_fitting" />
+        </div>
+        <div class="form-group">
+          <label for="seo_keywords">seo关键词</label>
+          <input type="text" class="form-control" id="seo_keywords" name="seo_keywords" />
+        </div>
+        <div class="form-group">
+          <label for="seo_desc">seo描述</label>
+          <textarea class="form-control" rows="3" id="seo_desc" name="seo_desc"></textarea>
+        </div>
+      </div>
+      <!-- 商品相册 -->
       <div class="tab-pane" id="photo">
         <div id="photoLib" class="photoLib"></div>
         <div id="photoList"></div>

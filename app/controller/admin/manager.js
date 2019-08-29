@@ -25,6 +25,7 @@ class ManagerController extends BaseController {
     let mobile = this.ctx.request.body.mobile;
     let email = this.ctx.request.body.email;
     let role_id = this.ctx.request.body.role_id;
+    let is_super = this.ctx.request.body.is_super;
     let add_time = (new Date()).getTime();
     // 判断用户名是否存在
     let result = await this.app.mysql.select('admin', {
@@ -41,7 +42,8 @@ class ManagerController extends BaseController {
         mobile,
         email,
         role_id,
-        add_time
+        add_time,
+        is_super
       })
       await this.success('/admin/manager');
     }
@@ -68,8 +70,9 @@ class ManagerController extends BaseController {
     let mobile = this.ctx.request.body.mobile;
     let email = this.ctx.request.body.email;
     let role_id = this.ctx.request.body.role_id;
+    let is_super = this.ctx.request.body.is_super;
     let param = {
-      username, mobile, email, role_id
+      username, mobile, email, role_id, is_super
     };
     if (password != '' && password.length < 6) {
       await this.error('/admin', '密码不得少于6位');

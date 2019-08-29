@@ -10,7 +10,8 @@ let app = {
   // 设置iframe高度
   resizeIframe:function(){
     let iframeHeight = document.documentElement.clientHeight - 100;
-    $('#rightMain').height(iframeHeight)
+    $('#rightMain').height(iframeHeight);
+    $('#aside').height(iframeHeight);
   },
   // 删除确认框
   deleteConfirm:function(){

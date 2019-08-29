@@ -264,6 +264,7 @@ header .admin-info a {
 }
 aside {
   width: 180px;
+  overflow-y: auto;
   border-right: 1px solid #eee;
 }
 aside .nav-item h2 {
@@ -272,6 +273,7 @@ aside .nav-item h2 {
   background: #3f87c5;
   padding-left: 20px;
   color: #fff;
+  border-bottom: 1px solid #fff;
 }
 aside .nav-item ul {
   overflow: hidden;
@@ -288,6 +290,9 @@ aside .nav-item ul li a {
 }
 aside .nav-item .hide-list {
   height: 0;
+}
+aside::-webkit-scrollbar {
+  display: none;
 }
 article {
   flex: 1;

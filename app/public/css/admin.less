@@ -178,6 +178,7 @@ header{
 }
 aside{
 	width: 180px;
+	overflow-y: auto;
 	border-right: 1px solid #eee;
 	.nav-item{
 		h2{
@@ -186,6 +187,7 @@ aside{
 			background: #3f87c5;
 			padding-left: 20px;
 			color: #fff;
+			border-bottom: 1px solid #fff;
 		}
 		ul{
 			overflow: hidden;
@@ -203,6 +205,9 @@ aside{
 		.hide-list{
 			height: 0;
 		}
+	}
+	&::-webkit-scrollbar {
+		display: none;
 	}
 }
 article{

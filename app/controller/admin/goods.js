@@ -11,9 +11,26 @@ class GoodsController extends BaseController {
   }
   // 添加商品页面
   async add() {
+    // 商品类型
     let goodsType = await this.app.mysql.select('goods_type');
+    // 商品分类
+    let oneLevel = await this.app.mysql.select('goods_cate', {
+      where: {
+        pid: 0
+      }
+    });
+    let twoLevel = await this.app.mysql.query('select * from goods_cate where pid != 0');
+    let goodsCate = [];
+    for (let item of oneLevel) {
+      goodsCate.push(item);
+      for (let item1 of twoLevel) {
+        if (item.id == item1.pid) {
+          goodsCate.push(item1);
+        }
+      }
+    }
     await this.ctx.render('admin/goods/add', {
-      goodsType
+      goodsType, goodsCate
     })
   }
   // 商品类型属性列表

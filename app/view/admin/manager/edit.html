@@ -29,6 +29,13 @@
         {% endfor %}
       </select>
     </div>
+    <div class="form-group">
+      <label for="is_super">超级管理员</label>
+      <select class="form-control" name="is_super">
+        <option value="0" {{ "selected" if manager.is_super == 0 else "" }}>否</option>
+        <option value="1" {{ "selected" if manager.is_super == 1 else "" }}>是</option>
+      </select>
+    </div>
     <button type="submit" class="btn btn-primary">提交</button>
   </form>
 </div>
