@@ -40,19 +40,10 @@ class Goods_cateController extends BaseController {
   }
   // 添加商品分类
   async doAdd() {
-    let stream = await this.ctx.getFileStream(); // 读取流
-    let fields = stream.fields; // 表单的其他数据
-    let filename = new Date().getTime() + Math.random().toString(36).substr(2) + path.extname(stream.filename).toLocaleLowerCase();
-    let target = 'app/public/admin/upload/' + filename;
-    try {
-      let writeStream = fs.createWriteStream(target);
-      stream.pipe(writeStream);
-    } catch (err) {
-      // 必须将上传的文件流消费掉，要不然浏览器响应会卡死
-      await sendToWormhole(stream);
-      throw err;
-    }
-    let img_url = '/public/admin/upload/' + filename;
+    let parts = this.ctx.multipart({ autoFields: true });
+    let imgList = await this.service.upload.uploadImg(parts);
+    let img_url = imgList[0] || '';
+    let fields = parts.field;
     fields.cate_img = img_url;
     fields.add_time = (new Date()).getTime();
     await this.app.mysql.insert('goods_cate', fields);

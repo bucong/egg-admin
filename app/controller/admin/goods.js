@@ -57,34 +57,94 @@ class GoodsController extends BaseController {
   }
   // 添加商品
   async doAdd() {
-    console.log(this.ctx.request.body);
-    let title = this.ctx.request.body.title;
-    let description = this.ctx.request.body.description;
-    let add_time = (new Date()).getTime();
-    // 判断商品名是否存在
-    let result = await this.app.mysql.select('goods', {
-      where: {
-        title
-      }
-    })
-    if (result.length > 0) {
-      await this.error('/admin/goods/add', '该商品名已存在');
-    } else {
-      await this.app.mysql.insert('goods', {
-        title, description, add_time
-      })
-      await this.success('/admin/goods');
+    let parts = this.ctx.multipart({ autoFields: true });
+    let imgList = await this.service.upload.uploadImg(parts);
+    let thumbnail = imgList[0];
+    let fields = parts.field;
+    let img_list = null;
+    if (fields.img_list && typeof(fields.img_list) == 'object') {
+      img_list = JSON.stringify(fields.img_list);
+    } else if (fields.img_list && typeof(fields.img_list) == 'string') {
+      img_list = JSON.stringify([fields.img_list]);
     }
+    let goodsData = {
+      title: fields.title,
+      sub_title: fields.sub_title,
+      price: fields.price,
+      original_price: fields.original_price,
+      thumbnail: thumbnail,
+      cate_id: fields.cate_id,
+      stock: fields.stock,
+      status: fields.status,
+      is_hot: fields.is_hot,
+      is_new: fields.is_new,
+      is_best: fields.is_best,
+      description: fields.description,
+      content: fields.content,
+      relation_goods: fields.relation_goods,
+      goods_type_id: fields.goods_type_id,
+      goods_gift: fields.goods_gift,
+      goods_fitting: fields.goods_fitting,
+      seo_keywords: fields.seo_keywords,
+      seo_desc: fields.seo_desc,
+      img_list: img_list,
+      add_time: (new Date()).getTime()
+    }
+    let insertRes = await this.app.mysql.insert('goods', goodsData);
+    if (fields.attr_id_list) {
+      let attr_id_list = fields.attr_id_list;
+      let attr_value_list = fields.attr_value_list;
+      if (typeof(attr_id_list) == 'string') {
+        attr_id_list = [attr_id_list]
+        attr_value_list = [attr_value_list]
+      }
+      for (let i = 0; i < attr_id_list.length; i ++) {
+        let typeAttrRes = await this.app.mysql.select('goods_type_attr', {
+          where: {
+            id: attr_id_list[i]
+          }
+        })
+        let attrData = {
+          goods_id: insertRes.insertId,
+          attr_id: typeAttrRes[0].id,
+          attr_type: typeAttrRes[0].attr_type,
+          attr_title: typeAttrRes[0].title,
+          attr_value: attr_value_list[i]
+        };
+        await this.app.mysql.insert('goods_attr', attrData);
+      }
+    }
+    await this.success('/admin/goods', '添加商品成功')
   }
   // 修改商品页面
   async edit() {
+    // 获取商品信息
     let id = this.ctx.request.query.id;
     let result = await this.app.mysql.select('goods', {
       where: {
         id: id
       }
     })
+    // 商品类型
+    let goodsType = await this.app.mysql.select('goods_type');
+    // 商品分类
+    let oneLevel = await this.app.mysql.select('goods_cate', {
+      where: {
+        pid: 0
+      }
+    });
+    let twoLevel = await this.app.mysql.query('select * from goods_cate where pid != 0');
+    let goodsCate = [];
+    for (let item of oneLevel) {
+      goodsCate.push(item);
+      for (let item1 of twoLevel) {
+        if (item.id == item1.pid) {
+          goodsCate.push(item1);
+        }
+      }
+    }
     await this.ctx.render('admin/goods/edit', {
+      goodsType, goodsCate,
       goods: result[0]
     })
   }

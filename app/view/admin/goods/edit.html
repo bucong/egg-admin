@@ -1,20 +1,211 @@
 {% include "../public/pageHeader.html" %}
 
-<div class="iframe-content">
-  <h1>修改商品</h1>
-  <form method="post" action="/admin/goods/doEdit">
-    <input type="hidden" name="_csrf" value="{{ csrf }}">
-    <input type="hidden" name="id" value="{{ goods.id }}">
-    <div class="form-group">
-      <label for="title">名称</label>
-      <input type="text" class="form-control" id="title" name="title" value="{{ goods.title }}" required />
-    </div>
-    <div class="form-group">
-      <label for="description">描述</label>
-      <textarea class="form-control" rows="3" id="description" name="description" required>{{ goods.description }}</textarea>
+<link rel="stylesheet" href="../../../public/plugin/wangEditor/wangEditor.min.css">
+<link rel="stylesheet" href="../../../public/plugin/webuploader/css/diyUpload.css">
+<link rel="stylesheet" href="../../../public/plugin/webuploader/css/webuploader.css">
+<div class="iframe-content goods">
+  <h1>编辑商品</h1>
+  <form method="post" action="/admin/goods/doAdd?_csrf={{ csrf }}" enctype="multipart/form-data">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#general" data-toggle="tab">基本信息</a></li>
+      <li><a href="#detail" data-toggle="tab">详细描述</a></li>
+      <li><a href="#attribute" data-toggle="tab">规格与包装</a></li>
+      <li><a href="#other" data-toggle="tab">其他信息</a></li>
+      <li><a href="#photo" data-toggle="tab">商品相册</a></li>
+    </ul>
+    <div class="tab-content">
+      <!-- 基本信息 -->
+      <div class="tab-pane active" id="general">
+        <div class="form-group">
+          <label for="title">名称</label>
+          <input type="text" class="form-control" id="title" name="title" value="{{goods.title}}" required />
+        </div>
+        <div class="form-group">
+          <label for="sub_title">附属标题</label>
+          <input type="text" class="form-control" id="sub_title" name="sub_title" value="{{goods.sub_title}}" />
+        </div>
+        <div class="form-group">
+          <label for="price">价格</label>
+          <input type="number" class="form-control" id="price" name="price" value="{{goods.price}}" required />
+        </div>
+        <div class="form-group">
+          <label for="original_price">原价</label>
+          <input type="number" class="form-control" id="original_price" name="original_price" value="{{goods.original_price}}" />
+        </div>
+        <div class="form-group">
+          <label for="stock">库存</label>
+          <input type="number" class="form-control" id="stock" name="stock" value="{{goods.stock}}" required />
+        </div>
+        <div class="form-group">
+          <label for="thumbnail">商品缩略图</label>
+          <input type="file" id="thumbnail" name="thumbnail" required />
+        </div>
+        <div class="form-group">
+          <label for="cate_id">所属分类</label>
+          <select class="form-control" name="cate_id" id="cate_id">
+            {% for item in goodsCate %}
+              {% if item.pid == 0 %}
+                <option value="{{ item.id }}" disabled>{{ item.title }}</option>
+              {% else %}
+                <option value="{{ item.id }}" {{ "selected" if item.id == goods.cate_id else "" }}>{{ "　　" + item.title }}</option>
+              {% endif %}
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <label>状态</label>
+          <div class="radio">
+            <label>
+              <input type="radio" name="status" value="1" {{ "checked" if goods.status == 1 else "" }}>
+              显示　　
+            </label>
+            <label>
+              <input type="radio" name="status" value="0"   {{ "checked" if goods.status != 1 else "" }}>
+              下架　　
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>加入推荐</label>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="is_best" value="1" {{ "checked" if goods.is_best == 1 else "" }}>
+              精品　　
+            </label>
+            <label>
+              <input type="checkbox" name="is_hot" value="1" {{ "checked" if goods.is_hot == 1 else "" }}>
+              热销　　
+            </label>
+            <label>
+              <input type="checkbox" name="is_new" value="1" {{ "checked" if goods.is_new == 1 else "" }}>
+              新品　　
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="description">描述</label>
+          <textarea class="form-control" rows="3" id="description" name="description">{{goods.description}}</textarea>
+        </div>
+      </div>
+      <!-- 详细描述 -->
+      <div class="tab-pane" id="detail">
+        <div id="editor"></div>
+        <textarea name="content" id="content" style="display: none">{{goods.content}}</textarea>
+      </div>
+      <!-- 规格与包装 -->
+      <div class="tab-pane" id="attribute">
+        <div class="form-group">
+          <label for="goods_type_id">商品类型</label>
+          <select class="form-control" name="goods_type_id" id="goods_type_id">
+            <option value="">--请选择--</option>
+            {% for item in goodsType %}
+            <option value="{{ item.id }}" {{ "selected" if goods.goods_type_id == item.id else ""}}>{{ item.title }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div id="goods_type_attribute"></div>
+      </div>
+      <!-- 其他信息 -->
+      <div class="tab-pane" id="other">
+        <div class="form-group">
+          <label for="relation_goods">关联商品</label>
+          <input type="text" class="form-control" id="relation_goods" name="relation_goods" value="{{goods.relation_goods}}" />
+        </div>
+        <div class="form-group">
+          <label for="goods_gift">关联赠品(格式：23-2,39-5 例如23-2中的23表示商品id,2表示数量)</label>
+          <input type="text" class="form-control" id="goods_gift" name="goods_gift" value="{{goods.goods_gift}}" />
+        </div>
+        <div class="form-group">
+          <label for="goods_fitting">关联配件(格式：23-2,39-5 例如23-2中的23表示商品id,2表示数量)</label>
+          <input type="text" class="form-control" id="goods_fitting" name="goods_fitting" value="{{goods.goods_fitting}}" />
+        </div>
+        <div class="form-group">
+          <label for="seo_keywords">seo关键词</label>
+          <input type="text" class="form-control" id="seo_keywords" name="seo_keywords" value="{{goods.seo_keywords}}" />
+        </div>
+        <div class="form-group">
+          <label for="seo_desc">seo描述</label>
+          <textarea class="form-control" rows="3" id="seo_desc" name="seo_desc">{{goods.seo_desc}}</textarea>
+        </div>
+      </div>
+      <!-- 商品相册 -->
+      <div class="tab-pane" id="photo">
+        <div id="photoLib" class="photoLib"></div>
+        <div id="photoList"></div>
+      </div>
     </div>
     <button type="submit" class="btn btn-primary">提交</button>
   </form>
 </div>
 
 {% include "../public/pageFooter.html" %}
+<script src="../../../public/plugin/wangEditor/wangEditor.min.js"></script>
+<script src="../../../public/plugin/webuploader/js/webuploader.html5only.min.js"></script>
+<script src="../../../public/plugin/webuploader/js/diyUpload.js"></script>
+<script>
+  //关联商品类型
+  $('#goods_type_id').change(function () {
+    var cate_id = $(this).val();
+    if (cate_id != '') {
+      var data = '';
+      $.get('/admin/goods/getTypeAttr?cate_id=' + cate_id, function (res) {
+        console.log(res.data);
+        data = res.data;
+        var str = "";
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].attr_type == 1) {
+            str += `<input type="hidden" name="attr_id_list" value="${data[i].id}" />
+            <div class="form-group">
+              <label>${data[i].title}</label>
+              <input type="text" class="form-control" name="attr_value_list" required />
+            </div>`
+          } else if (data[i].attr_type == 2) {
+            str += `<input type="hidden" name="attr_id_list" value="${data[i].id}" />
+            <div class="form-group">
+              <label>${data[i].title}</label>
+              <textarea cols="50" rows="3" name="attr_value_list"></textarea>
+            </div>`
+          } else {
+            var arr = data[i].attr_value.split('\n');
+            str += `<input type="hidden" name="attr_id_list" value="${data[i].id}" />
+            <div class="form-group">
+              <label>${data[i].title}</label>
+              <select class="form-control" name="attr_value_list">`
+            for (var j = 0; j < arr.length; j++) {
+              str += `<option value="${arr[j]}">${arr[j]}</option>`
+            }
+            str += `</select>
+            </div>`
+          }
+        }
+        $('#goods_type_attribute').html(str);
+      })
+    }
+  })
+
+  // 富文本
+  let E = window.wangEditor
+  let editor = new E('#editor')
+  let $content = $('#content');
+  editor.customConfig.onchange = function (html) {
+    // 监控变化，同步更新到 textarea
+    $content.val(html)
+  }
+  editor.customConfig.uploadImgServer = '/admin/goods/editorUpload'; // 上传图片到服务器文件夹
+  editor.customConfig.uploadFileName = 'imgFile'; // 图片name
+  editor.create();
+  // 给editor赋值
+  $('#editor .w-e-text').html($content.val());
+
+  // 批量上传图片        
+  $('#photoLib').diyUpload({
+    url: '/admin/goods/editorUpload',
+    success: function (res) {
+      let photoStr = '<input type="hidden" name="img_list" value=' + res.data[0] + ' />';
+      $('#photoList').append(photoStr);
+    },
+    error: function (err) {
+      console.info(err);
+    }
+  });
+</script>

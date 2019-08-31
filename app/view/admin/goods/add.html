@@ -29,8 +29,12 @@
           <input type="number" class="form-control" id="price" name="price" required />
         </div>
         <div class="form-group">
-          <label for="original_price">价格</label>
+          <label for="original_price">原价</label>
           <input type="number" class="form-control" id="original_price" name="original_price" />
+        </div>
+        <div class="form-group">
+          <label for="stock">库存</label>
+          <input type="number" class="form-control" id="stock" name="stock" required />
         </div>
         <div class="form-group">
           <label for="thumbnail">商品缩略图</label>
@@ -40,7 +44,11 @@
           <label for="cate_id">所属分类</label>
           <select class="form-control" name="cate_id" id="cate_id">
             {% for item in goodsCate %}
-            <option value="{{ item.id }}">{{ ("----" if item.pid != 0 else "") + item.title }}</option>
+              {% if item.pid == 0 %}
+                <option value="{{ item.id }}" disabled>{{ item.title }}</option>
+              {% else %}
+                <option value="{{ item.id }}">{{ "　　" + item.title }}</option>
+              {% endif %}
             {% endfor %}
           </select>
         </div>
@@ -138,39 +146,41 @@
   //关联商品类型
   $('#goods_type_id').change(function () {
     var cate_id = $(this).val();
-    var data = '';
-    $.get('/admin/goods/getTypeAttr?cate_id=' + cate_id, function (res) {
-      console.log(res.data);
-      data = res.data;
-      var str = "";
-      for (var i = 0; i < data.length; i++) {
-        if (data[i].attr_type == 1) {
-          str += `<input type="hidden" name="attr_id_list" value="${data[i].id}" />
-          <div class="form-group">
-            <label>${data[i].title}</label>
-            <input type="text" class="form-control" name="attr_value_list" required />
-          </div>`
-        } else if (data[i].attr_type == 2) {
-          str += `<input type="hidden" name="attr_id_list" value="${data[i].id}" />
-          <div class="form-group">
-            <label>${data[i].title}</label>
-            <textarea cols="50" rows="3" name="attr_value_list"></textarea>
-          </div>`
-        } else {
-          var arr = data[i].attr_value.split('\n');
-          str += `<input type="hidden" name="attr_id_list" value="${data[i].id}" />
-          <div class="form-group">
-            <label>${data[i].title}</label>
-            <select class="form-control" name="attr_value_list">`
-          for (var j = 0; j < arr.length; j++) {
-            str += `<option value="${arr[j]}">${arr[j]}</option>`
+    if (cate_id != '') {
+      var data = '';
+      $.get('/admin/goods/getTypeAttr?cate_id=' + cate_id, function (res) {
+        console.log(res.data);
+        data = res.data;
+        var str = "";
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].attr_type == 1) {
+            str += `<input type="hidden" name="attr_id_list" value="${data[i].id}" />
+            <div class="form-group">
+              <label>${data[i].title}</label>
+              <input type="text" class="form-control" name="attr_value_list" required />
+            </div>`
+          } else if (data[i].attr_type == 2) {
+            str += `<input type="hidden" name="attr_id_list" value="${data[i].id}" />
+            <div class="form-group">
+              <label>${data[i].title}</label>
+              <textarea cols="50" rows="3" name="attr_value_list"></textarea>
+            </div>`
+          } else {
+            var arr = data[i].attr_value.split('\n');
+            str += `<input type="hidden" name="attr_id_list" value="${data[i].id}" />
+            <div class="form-group">
+              <label>${data[i].title}</label>
+              <select class="form-control" name="attr_value_list">`
+            for (var j = 0; j < arr.length; j++) {
+              str += `<option value="${arr[j]}">${arr[j]}</option>`
+            }
+            str += `</select>
+            </div>`
           }
-          str += `</select>
-          </div>`
         }
-      }
-      $('#goods_type_attribute').html(str);
-    })
+        $('#goods_type_attribute').html(str);
+      })
+    }
   })
 
   // 富文本
@@ -191,7 +201,7 @@
   $('#photoLib').diyUpload({
     url: '/admin/goods/editorUpload',
     success: function (res) {
-      let photoStr = '<input type="hidden" name="goods_image_list" value=' + res.data[0] + ' />';
+      let photoStr = '<input type="hidden" name="img_list" value=' + res.data[0] + ' />';
       $('#photoList').append(photoStr);
     },
     error: function (err) {

@@ -14,6 +14,8 @@ class PayController extends Controller {
   // 支付宝支付
   async doAlipay() {
     let params = this.ctx.request.body;
+    this.ctx.logger.info('支付宝支付参数:');
+    this.ctx.logger.info(params);
     // pay_type: 1为PC支付，2为移动端支付
     let order_no = (new Date()).getTime();
     let data = {
@@ -28,7 +30,8 @@ class PayController extends Controller {
   async alipayNotify(){
     //接收post提交的XML，通过xmlparse中间件将XML转化为json
     const params = this.ctx.request.body;
-    console.log(params);
+    this.ctx.logger.info('支付宝回调参数');
+    this.ctx.logger.info(params);
     // 支付成功数据如下
     // { gmt_create: '2019-08-24 21:40:09',
     //   charset: 'utf-8',
@@ -59,9 +62,9 @@ class PayController extends Controller {
     if(result.code == 0){
         if(params.trade_status == 'TRADE_SUCCESS'){
           //更新订单
-          console.log('支付成功，更新订单')
+          this.ctx.logger.info('支付成功，更新订单')
         } else {
-          console.log('支付失败，结束')
+          this.ctx.logger.info('支付失败，结束')
         }
      }
   }
