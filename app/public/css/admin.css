@@ -305,6 +305,10 @@ article {
   line-height: 50px;
   margin-bottom: 20px;
 }
+.iframe-content .pages-box {
+  display: flex;
+  justify-content: center;
+}
 .table td {
   vertical-align: middle !important;
 }

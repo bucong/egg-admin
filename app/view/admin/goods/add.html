@@ -145,10 +145,10 @@
 <script>
   //关联商品类型
   $('#goods_type_id').change(function () {
-    var cate_id = $(this).val();
-    if (cate_id != '') {
+    var type_id = $(this).val();
+    if (type_id != '') {
       var data = '';
-      $.get('/admin/goods/getTypeAttr?cate_id=' + cate_id, function (res) {
+      $.get('/admin/goods/getTypeAttr?type_id=' + type_id, function (res) {
         console.log(res.data);
         data = res.data;
         var str = "";
@@ -180,6 +180,8 @@
         }
         $('#goods_type_attribute').html(str);
       })
+    } else {
+      $('#goods_type_attribute').html('');
     }
   })
 

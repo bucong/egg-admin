@@ -26,7 +26,7 @@ module.exports = appInfo => {
     defaultViewEngine: 'nunjucks',
     mapping: {
       '.html': 'nunjucks',
-    },
+    }
   };
   
   //设置监听端口

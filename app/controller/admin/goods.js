@@ -35,10 +35,10 @@ class GoodsController extends BaseController {
   }
   // 商品类型属性列表
   async getTypeAttr() {
-    let cate_id = this.ctx.request.query.cate_id;
+    let type_id = this.ctx.request.query.type_id;
     let typeAttr = await this.app.mysql.select('goods_type_attr', {
       where: {
-        cate_id
+        type_id
       }
     })
     this.ctx.body = {
@@ -120,7 +120,7 @@ class GoodsController extends BaseController {
   async edit() {
     // 获取商品信息
     let id = this.ctx.request.query.id;
-    let result = await this.app.mysql.select('goods', {
+    let goodsDetail = await this.app.mysql.select('goods', {
       where: {
         id: id
       }
@@ -143,9 +143,28 @@ class GoodsController extends BaseController {
         }
       }
     }
+    // 规格与包装
+    let typeAttr = await this.app.mysql.select('goods_attr', {
+      where: {
+        goods_id: id
+      }
+    })
+    if (typeAttr.length > 0) {
+      for (let item of typeAttr) {
+        if (item.attr_type == 3) {
+          let optionsRes = await this.app.mysql.select('goods_type_attr', {
+            where: {
+              id: item.attr_id
+            }
+          })
+          item.options_list = optionsRes[0]
+        }
+      }
+    }
     await this.ctx.render('admin/goods/edit', {
       goodsType, goodsCate,
-      goods: result[0]
+      goods: goodsDetail[0],
+      typeAttr
     })
   }
   // 修改商品

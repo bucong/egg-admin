@@ -20,7 +20,7 @@
 		{% for item in goodsCate %}
 		<tr>
 			<td>{{ "　　" if item.pid != 0 else "" }}{{ item.title }}</td>
-			<td><img src="{{ item.cate_img }}" width="120px" alt=""></td>
+			<td><img src="{{ item.cate_img }}" width="80px" alt=""></td>
 			<td>{{ item.filter_attr }}</td>
 			<td>{{ item.template }}</td>
 			<td>{{ item.seo_title }}</td>

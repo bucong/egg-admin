@@ -19,7 +19,7 @@
 		{% for item in goods %}
 		<tr>
 			<td>{{ item.id }}</td>
-			<td><img src="{{ item.thumbnail }}" width="120px" alt=""></td>
+			<td><img src="{{ item.thumbnail }}" width="80px" alt=""></td>
 			<td>{{ item.title }}</td>
 			<td>{{ item.price }}</td>
 			<td>{{ item.stock }}</td>
@@ -38,6 +38,25 @@
 		</tr>
 		{% endfor %}
 	</table>
+	<nav aria-label="Page navigation" class="pages-box">
+		<ul class="pagination">
+			<li>
+				<a href="#" aria-label="Previous">
+					<span aria-hidden="true">&laquo;</span>
+				</a>
+			</li>
+			<li><a href="#">1</a></li>
+			<li><a href="#">2</a></li>
+			<li><a href="#">3</a></li>
+			<li><a href="#">4</a></li>
+			<li><a href="#">5</a></li>
+			<li>
+				<a href="#" aria-label="Next">
+					<span aria-hidden="true">&raquo;</span>
+				</a>
+			</li>
+		</ul>
+	</nav>
 </div>
 
 {% include "../public/pageFooter.html" %}

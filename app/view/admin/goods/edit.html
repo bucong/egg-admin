@@ -103,7 +103,33 @@
             {% endfor %}
           </select>
         </div>
-        <div id="goods_type_attribute"></div>
+        <div id="goods_type_attribute">
+          {% for item in typeAttr %}
+            {% if item.attr_type == 1 %}
+              <input type="hidden" name="attr_id_list" value="{{item.attr_id}}" />
+              <div class="form-group">
+                <label>{{item.attr_title}}</label>
+                <input type="text" class="form-control" name="attr_value_list" value="{{item.attr_value}}" required />
+              </div>
+            {% elif item.attr_type == 2 %}
+              <input type="hidden" name="attr_id_list" value="{{item.attr_id}}" />
+              <div class="form-group">
+                <label>{{item.attr_title}}</label>
+                <textarea cols="50" rows="3" name="attr_value_list">{{item.attr_value}}</textarea>
+              </div>
+            {% elif item.attr_type == 3 %}
+              <input type="hidden" name="attr_id_list" value="{{item.attr_id}}" />
+              <div class="form-group">
+                <label>{{item.attr_title}}</label>
+                <select class="form-control" name="attr_value_list">
+                  {% for item1 in item.options_list.attr_value.split('\n') %}
+                    <option value="{{item1}}" {{"select" if item1 == item.attr_value else ""}}>{{item1}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
       </div>
       <!-- 其他信息 -->
       <div class="tab-pane" id="other">
@@ -145,10 +171,10 @@
 <script>
   //关联商品类型
   $('#goods_type_id').change(function () {
-    var cate_id = $(this).val();
-    if (cate_id != '') {
+    var type_id = $(this).val();
+    if (type_id != '') {
       var data = '';
-      $.get('/admin/goods/getTypeAttr?cate_id=' + cate_id, function (res) {
+      $.get('/admin/goods/getTypeAttr?type_id=' + type_id, function (res) {
         console.log(res.data);
         data = res.data;
         var str = "";
@@ -180,6 +206,8 @@
         }
         $('#goods_type_attribute').html(str);
       })
+    } else {
+      $('#goods_type_attribute').html('');
     }
   })
 
