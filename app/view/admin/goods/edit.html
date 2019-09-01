@@ -5,7 +5,8 @@
 <link rel="stylesheet" href="../../../public/plugin/webuploader/css/webuploader.css">
 <div class="iframe-content goods">
   <h1>编辑商品</h1>
-  <form method="post" action="/admin/goods/doAdd?_csrf={{ csrf }}" enctype="multipart/form-data">
+  <form method="post" action="/admin/goods/doEdit?_csrf={{ csrf }}" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="{{goods.id}}" />
     <ul class="nav nav-tabs">
       <li class="active"><a href="#general" data-toggle="tab">基本信息</a></li>
       <li><a href="#detail" data-toggle="tab">详细描述</a></li>
@@ -38,7 +39,8 @@
         </div>
         <div class="form-group">
           <label for="thumbnail">商品缩略图</label>
-          <input type="file" id="thumbnail" name="thumbnail" required />
+          <input type="file" id="thumbnail" name="thumbnail" />
+          <img src="{{goods.thumbnail}}" width="100px" alt="">
         </div>
         <div class="form-group">
           <label for="cate_id">所属分类</label>
@@ -155,9 +157,25 @@
         </div>
       </div>
       <!-- 商品相册 -->
-      <div class="tab-pane" id="photo">
+      <div class="tab-pane goods-photo-box" id="photo">
+        <ul class="img-list-show">
+          {% if goods.img_list %}
+            {% for item in helper.jsonParse(goods.img_list) %}
+            <li>
+              <img src="{{item}}" width="100px" alt="">
+              <img src="../../../public/img/no.gif" class="delete-img" alt="">
+            </li>
+            {% endfor %}
+          {% endif %}
+        </ul>
         <div id="photoLib" class="photoLib"></div>
-        <div id="photoList"></div>
+        <div id="photoList">
+          {% if goods.img_list %}
+            {% for item in helper.jsonParse(goods.img_list) %}
+              <input type="hidden" name="img_list" value="{{item}}" />
+            {% endfor %}
+          {% endif %}
+        </div>
       </div>
     </div>
     <button type="submit" class="btn btn-primary">提交</button>
@@ -236,4 +254,10 @@
       console.info(err);
     }
   });
+  // 删除图片
+  $('.img-list-show .delete-img').click(function(){
+    let index = $(this).parent().index();
+    $(this).parent().remove();
+    $('#photoList input').eq(index).remove();
+  })
 </script>

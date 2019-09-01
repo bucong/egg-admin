@@ -1,9 +1,13 @@
 {% include "../public/pageHeader.html" %}
-
+<link rel="stylesheet" href="../../../public/plugin/pagination/css/pagination.css">
 <div class="iframe-content">
 	<h1 class="flex">
 		<span>商品列表</span>
-		<a href="/admin/goods/add" class="btn btn-primary">添加商品</a>
+		<form action="/admin/goods/search" class="flex" method="GET">
+			<input type="hidden" name="_csrf" value="{{ csrf }}" />
+			<input type="search" class="form-control" name="search" placeholder="商品id或名称">　
+			<button class="btn btn-primary" type="submit">查询</button>
+		</form>
 	</h1>
 	<table class="table table-hover">
 		<tr>
@@ -33,30 +37,32 @@
 			</td>
 			<td>
 				<a class="btn btn-primary" href="/admin/goods/edit?id={{ item.id }}">修改</a>
-				<a class="btn btn-danger delete" href="/admin/delete?model=goods&id={{ item.id }}">删除</a>
+				<a class="btn btn-danger delete" href="/admin/goods/delete?id={{ item.id }}">删除</a>
 			</td>
 		</tr>
 		{% endfor %}
 	</table>
-	<nav aria-label="Page navigation" class="pages-box">
-		<ul class="pagination">
-			<li>
-				<a href="#" aria-label="Previous">
-					<span aria-hidden="true">&laquo;</span>
-				</a>
-			</li>
-			<li><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">5</a></li>
-			<li>
-				<a href="#" aria-label="Next">
-					<span aria-hidden="true">&raquo;</span>
-				</a>
-			</li>
-		</ul>
-	</nav>
+	<div class="page-box">
+		<div class="M-box"></div>
+	</div>
 </div>
 
 {% include "../public/pageFooter.html" %}
+<script src="../../../public/plugin/pagination/js/jquery.pagination.js"></script>
+<script>
+	$('.M-box').pagination({
+		pageCount: Number('{{totalPage}}'),
+		current: Number('{{pageNo}}'),
+    jump: true,
+		coping: true,
+		isHide: true, // 总页数为0或1时隐藏分页控件
+    homePage: '首页',
+    endPage: '末页',
+    prevContent: '上页',
+		nextContent: '下页',
+		callback: function(api){
+			console.log(api.getCurrent())
+			window.location.href = '/admin/goods?pageNo=' + api.getCurrent()
+		}
+	});
+</script>

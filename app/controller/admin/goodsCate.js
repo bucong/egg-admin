@@ -2,29 +2,11 @@
 
 const BaseController = require('./base');
 
-const path = require('path');
-const fs = require('fs');
-const sendToWormhole = require('stream-wormhole');
-
 class Goods_cateController extends BaseController {
   async index() {
-    let oneLevel = await this.app.mysql.select('goods_cate', {
-      where: {
-        pid: 0
-      }
-    });
-    let twoLevel = await this.app.mysql.query('select * from goods_cate where pid != 0');
-    let result = [];
-    for (let item of oneLevel) {
-      result.push(item);
-      for (let item1 of twoLevel) {
-        if (item.id == item1.pid) {
-          result.push(item1);
-        }
-      }
-    }
+    let goodsCate = await this.service.admin.getCate();
     await this.ctx.render('admin/goodsCate/index', {
-      goodsCate: result
+      goodsCate
     })
   }
   // 添加商品分类页面
@@ -48,6 +30,43 @@ class Goods_cateController extends BaseController {
     fields.add_time = (new Date()).getTime();
     await this.app.mysql.insert('goods_cate', fields);
     await this.success('/admin/goodsCate', '添加分类成功')
+  }
+  // 修改商品分类页面
+  async edit() {
+    let id = this.ctx.request.query.id;
+    let oneLevel = await this.app.mysql.select('goods_cate', {
+      where: {
+        pid: 0
+      }
+    });
+    let cateList = await this.app.mysql.select('goods_cate', {
+      where: {
+        id
+      }
+    });
+    await this.ctx.render('admin/goodsCate/edit', {
+      cate: cateList[0],
+      oneLevel
+    })
+  }
+  // 修改商品分类
+  async doEdit() {
+    let parts = this.ctx.multipart({ autoFields: true });
+    let imgList = await this.service.upload.uploadImg(parts);
+    let img_url = imgList[0];
+    let fields = parts.field;
+    let id = fields.id;
+    fields.add_time = (new Date()).getTime();
+    if (img_url) {
+      fields.cate_img = img_url;
+    }
+    console.log(fields)
+    await this.app.mysql.update('goods_cate', fields, {
+      where: {
+        id
+      }
+    });
+    await this.success('/admin/goodsCate', '修改分类成功')
   }
 }
 

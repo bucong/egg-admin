@@ -305,13 +305,31 @@ article {
   line-height: 50px;
   margin-bottom: 20px;
 }
-.iframe-content .pages-box {
+.iframe-content .page-box {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
 }
 .table td {
   vertical-align: middle !important;
 }
 .goods .tab-content {
   margin: 20px 0;
+}
+.goods .goods-photo-box ul {
+  display: flex;
+  align-items: center;
+}
+.goods .goods-photo-box ul li {
+  margin: 0 20px 20px 0;
+  position: relative;
+}
+.goods .goods-photo-box ul li .delete-img {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 50%;
+  cursor: pointer;
 }

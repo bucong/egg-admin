@@ -4,9 +4,17 @@ const BaseController = require('./base');
 
 class GoodsController extends BaseController {
   async index() {
-    const result = await this.app.mysql.select('goods');
+    let pageNo = this.ctx.request.query.pageNo || 1;
+    let pageSize = this.ctx.request.query.pageSize || 20;
+    let result = await this.app.mysql.select('goods', {
+      limit: pageSize,
+      offset: (pageNo - 1) * pageSize
+    });
+    let totalPage = await this.service.admin.getTotalPage('goods', pageSize);
     await this.ctx.render('admin/goods/index', {
-      goods: result
+      goods: result,
+      pageNo,
+      totalPage
     })
   }
   // 添加商品页面
@@ -169,17 +177,91 @@ class GoodsController extends BaseController {
   }
   // 修改商品
   async doEdit() {
-    let id = this.ctx.request.body.id;
-    let title = this.ctx.request.body.title;
-    let description = this.ctx.request.body.description;
-    await this.app.mysql.update('goods', {
-      title, description
-    }, {
+    let parts = this.ctx.multipart({ autoFields: true });
+    let imgList = await this.service.upload.uploadImg(parts);
+    let thumbnail = imgList[0];
+    let fields = parts.field;
+    console.log(fields)
+    let id = fields.id; // 商品id
+    let img_list = null;
+    if (fields.img_list && typeof(fields.img_list) == 'object') {
+      img_list = JSON.stringify(fields.img_list);
+    } else if (fields.img_list && typeof(fields.img_list) == 'string') {
+      img_list = JSON.stringify([fields.img_list]);
+    }
+    let goodsData = {
+      title: fields.title,
+      sub_title: fields.sub_title,
+      price: fields.price,
+      original_price: fields.original_price,
+      cate_id: fields.cate_id,
+      stock: fields.stock,
+      status: fields.status,
+      is_hot: fields.is_hot,
+      is_new: fields.is_new,
+      is_best: fields.is_best,
+      description: fields.description,
+      content: fields.content,
+      relation_goods: fields.relation_goods,
+      goods_type_id: fields.goods_type_id,
+      goods_gift: fields.goods_gift,
+      goods_fitting: fields.goods_fitting,
+      seo_keywords: fields.seo_keywords,
+      seo_desc: fields.seo_desc,
+      img_list: img_list,
+      add_time: (new Date()).getTime()
+    }
+    // 判断是否上传新的轮播图，替换原有轮播图
+    if (thumbnail) {
+      goodsData.thumbnail = thumbnail;
+    }
+    let goodsRes = await this.app.mysql.update('goods', goodsData, {
       where: {
         id
       }
+    });
+    if (goodsRes.affectedRows == 1) {
+      // 更新商品信息成功
+      await this.app.mysql.delete('goods_attr', {
+        goods_id: id
+      })
+    }
+    if (fields.attr_id_list) {
+      let attr_id_list = fields.attr_id_list;
+      let attr_value_list = fields.attr_value_list;
+      if (typeof(attr_id_list) == 'string') {
+        attr_id_list = [attr_id_list]
+        attr_value_list = [attr_value_list]
+      }
+      for (let i = 0; i < attr_id_list.length; i ++) {
+        let typeAttrRes = await this.app.mysql.select('goods_type_attr', {
+          where: {
+            id: attr_id_list[i]
+          }
+        })
+        let attrData = {
+          goods_id: id,
+          attr_id: typeAttrRes[0].id,
+          attr_type: typeAttrRes[0].attr_type,
+          attr_title: typeAttrRes[0].title,
+          attr_value: attr_value_list[i]
+        };
+        await this.app.mysql.insert('goods_attr', attrData);
+      }
+    }
+    await this.success('/admin/goods', '修改商品成功')
+  }
+  // 删除商品
+  async delete() {
+    let id = this.ctx.request.query.id;
+    await this.app.mysql.delete('goods', {
+      id
     })
-    await this.success('/admin/goods');
+    await this.app.mysql.delete('goods_attr', {
+      goods_id: id
+    })
+    // 返回原页面
+    this.ctx.redirect('/admin/goods', '删除成功');
   }
 }
 
