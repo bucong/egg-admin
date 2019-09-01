@@ -3,9 +3,9 @@
 <div class="iframe-content">
 	<h1 class="flex">
 		<span>商品列表</span>
-		<form action="/admin/goods/search" class="flex" method="GET">
+		<form action="/admin/goods" class="flex" method="GET">
 			<input type="hidden" name="_csrf" value="{{ csrf }}" />
-			<input type="search" class="form-control" name="search" placeholder="商品id或名称">　
+			<input type="search" class="form-control" name="search" value="{{search}}" placeholder="商品id或名称">　
 			<button class="btn btn-primary" type="submit">查询</button>
 		</form>
 	</h1>

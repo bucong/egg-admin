@@ -64,7 +64,7 @@
 	max-width: 800px;
 	min-height: 500px;
 }
-input{
+.M-box input{
     float: left;
     margin:0 5px;
     width: 38px;

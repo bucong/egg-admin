@@ -6,37 +6,46 @@ class GoodsController extends BaseController {
   async index() {
     let pageNo = this.ctx.request.query.pageNo || 1;
     let pageSize = this.ctx.request.query.pageSize || 20;
-    let result = await this.app.mysql.select('goods', {
-      limit: pageSize,
-      offset: (pageNo - 1) * pageSize
-    });
-    let totalPage = await this.service.admin.getTotalPage('goods', pageSize);
-    await this.ctx.render('admin/goods/index', {
-      goods: result,
-      pageNo,
-      totalPage
-    })
+    let search = this.ctx.request.query.search;
+    if (search && search != '') {
+      // 查找
+      let result = [];
+      if(/^[0-9]+$/.test(search)){
+        result = await this.app.mysql.select('goods', {
+          where: {
+            id: search
+          }
+        });
+      } else {
+        result = await this.app.mysql.query('select * from goods where title like "%' + search + '%"');
+      }
+      await this.ctx.render('admin/goods/index', {
+        goods: result,
+        pageNo: 1,
+        totalPage: 1,
+        search
+      })
+    } else {
+      // 列表分页
+      let result = await this.app.mysql.select('goods', {
+        limit: pageSize,
+        offset: (pageNo - 1) * pageSize
+      });
+      let totalPage = await this.service.admin.getTotalPage('goods', pageSize);
+      await this.ctx.render('admin/goods/index', {
+        goods: result,
+        pageNo,
+        totalPage,
+        search: ''
+      })
+    }
   }
   // 添加商品页面
   async add() {
     // 商品类型
     let goodsType = await this.app.mysql.select('goods_type');
     // 商品分类
-    let oneLevel = await this.app.mysql.select('goods_cate', {
-      where: {
-        pid: 0
-      }
-    });
-    let twoLevel = await this.app.mysql.query('select * from goods_cate where pid != 0');
-    let goodsCate = [];
-    for (let item of oneLevel) {
-      goodsCate.push(item);
-      for (let item1 of twoLevel) {
-        if (item.id == item1.pid) {
-          goodsCate.push(item1);
-        }
-      }
-    }
+    let goodsCate = await this.service.admin.getCate();
     await this.ctx.render('admin/goods/add', {
       goodsType, goodsCate
     })
@@ -136,21 +145,7 @@ class GoodsController extends BaseController {
     // 商品类型
     let goodsType = await this.app.mysql.select('goods_type');
     // 商品分类
-    let oneLevel = await this.app.mysql.select('goods_cate', {
-      where: {
-        pid: 0
-      }
-    });
-    let twoLevel = await this.app.mysql.query('select * from goods_cate where pid != 0');
-    let goodsCate = [];
-    for (let item of oneLevel) {
-      goodsCate.push(item);
-      for (let item1 of twoLevel) {
-        if (item.id == item1.pid) {
-          goodsCate.push(item1);
-        }
-      }
-    }
+    let goodsCate = await this.service.admin.getCate();
     // 规格与包装
     let typeAttr = await this.app.mysql.select('goods_attr', {
       where: {
