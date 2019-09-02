@@ -28,8 +28,8 @@
 			<td>{{ item.seo_description }}</td>
 			<td>{{ helper.formatDate(item.add_time) }}</td>
 			<td>
-				<a class="btn btn-primary" href="/admin/goodsCate/edit?id={{ item.id }}">修改</a>
-				<a class="btn btn-danger delete" href="/admin/delete?model=goods_cate&id={{ item.id }}">删除</a>
+				<a href="/admin/goodsCate/edit?id={{ item.id }}"><i class="iconfont">&#xe63c;</i></a>　
+				<a class="delete" href="/admin/delete?model=goods_cate&id={{ item.id }}"><i class="iconfont">&#xe612;</i></a>
 			</td>
 		</tr>
 		{% endfor %}

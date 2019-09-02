@@ -36,8 +36,8 @@
 				{% endif %}
 			</td>
 			<td>
-				<a class="btn btn-primary" href="/admin/goods/edit?id={{ item.id }}">修改</a>
-				<a class="btn btn-danger delete" href="/admin/goods/delete?id={{ item.id }}">删除</a>
+				<a href="/admin/goods/edit?id={{ item.id }}"><i class="iconfont">&#xe63c;</i></a>　
+				<a class="delete" href="/admin/goods/delete?id={{ item.id }}"><i class="iconfont">&#xe612;</i></a>
 			</td>
 		</tr>
 		{% endfor %}

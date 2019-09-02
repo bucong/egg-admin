@@ -6,6 +6,7 @@ let app = {
     this.deleteConfirm();
     this.resizeIframe();
     this.sideToggle();
+    this.changeSkin();
   },
   // 设置iframe高度
   resizeIframe:function(){
@@ -27,6 +28,18 @@ let app = {
       }else{
         $(this).parent().find('ul').addClass('hide-list');
       }
+    })
+  },
+  // 切换主题
+  changeSkin:function(){
+    let adminSkin = window.localStorage.getItem('adminSkin');
+    if (adminSkin) {
+      $('header').css('background', adminSkin);
+    }
+    $('.skin-box li').click(function(e){
+      let color = e.currentTarget.dataset.color;
+      $('header').css('background', color);
+      window.localStorage.setItem('adminSkin', color);
     })
   },
   // 改变状态

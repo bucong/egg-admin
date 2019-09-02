@@ -3,7 +3,7 @@
 <div class="iframe-content">
 	<h1 class="flex">
 		<span>商品类型属性</span>
-		<a href="/admin/goodsTypeAttr/add?cate_id={{ cate_id }}" class="btn btn-primary">添加商品类型属性</a>
+		<a href="/admin/goodsTypeAttr/add?type_id={{ type_id }}" class="btn btn-primary">添加商品类型属性</a>
 	</h1>
 	<table class="table table-hover">
 		<tr>
@@ -28,8 +28,8 @@
 			<td>{{ item.attr_value }}</td>
 			<td>{{ helper.formatDate(item.add_time) }}</td>
 			<td>
-				<a class="btn btn-primary" href="/admin/goodsTypeAttr/edit?id={{ item.id }}">修改</a>
-				<a class="btn btn-danger delete" href="/admin/delete?model=goods_type_attr&id={{ item.id }}">删除</a>
+				<a href="/admin/goodsTypeAttr/edit?id={{ item.id }}"><i class="iconfont">&#xe63c;</i></a>　
+				<a class="delete" href="/admin/delete?model=goods_type_attr&id={{ item.id }}"><i class="iconfont">&#xe612;</i></a>
 			</td>
 		</tr>
 		{% endfor %}

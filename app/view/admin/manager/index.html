@@ -29,8 +29,8 @@
 			</td>
 			<td>{{ '是' if item.is_super == 1 else '否' }}</td>
 			<td>
-				<a class="btn btn-primary" href="/admin/manager/edit?id={{ item.id }}">修改</a>
-				<a class="btn btn-danger delete" href="/admin/delete?model=admin&id={{ item.id }}">删除</a>
+				<a href="/admin/manager/edit?id={{ item.id }}"><i class="iconfont">&#xe63c;</i></a>　
+				<a class="delete" href="/admin/delete?model=admin&id={{ item.id }}"><i class="iconfont">&#xe612;</i></a>
 			</td>
 		</tr>
 		{% endfor %}

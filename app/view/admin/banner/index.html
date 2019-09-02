@@ -27,7 +27,7 @@
 			<td>{{ item.sort }}</td>
 			<td>{{ helper.formatDate(item.add_time) }}</td>
 			<td>
-				<a class="btn btn-danger delete" href="/admin/delete?model=banner&id={{ item.id }}">删除</a>
+				<a class="delete" href="/admin/delete?model=banner&id={{ item.id }}"><i class="iconfont">&#xe612;</i></a>
 			</td>
 		</tr>
 		{% endfor %}

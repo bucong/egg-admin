@@ -1,6 +1,20 @@
 html {
   height: 100%;
 }
+@font-face {
+  font-family: 'iconfont';
+  src: url('//at.alicdn.com/t/font_1382138_ag79oko9h3j.eot');
+  src: url('//at.alicdn.com/t/font_1382138_ag79oko9h3j.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_1382138_ag79oko9h3j.woff2') format('woff2'), url('//at.alicdn.com/t/font_1382138_ag79oko9h3j.woff') format('woff'), url('//at.alicdn.com/t/font_1382138_ag79oko9h3j.ttf') format('truetype'), url('//at.alicdn.com/t/font_1382138_ag79oko9h3j.svg#iconfont') format('svg');
+  
+  /* project id 1382138 */
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 body,
 h1,
 h2,
@@ -59,6 +73,7 @@ a:link,
 a:visited,
 a:active {
   text-decoration: none;
+  color: #000;
 }
 img {
   border: 0;
@@ -228,6 +243,61 @@ header {
 header .logo {
   font-size: 20px;
 }
+header .admin-info .admin-info-box {
+  position: relative;
+}
+header .admin-info .admin-info-box .admin-name {
+  cursor: pointer;
+}
+header .admin-info .admin-info-box ul {
+  display: none;
+  position: absolute;
+  top: 60px;
+  left: -20px;
+  width: 80px;
+  background: #fff;
+  z-index: 100;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+header .admin-info .admin-info-box ul li {
+  border-bottom: 1px solid #eee;
+}
+header .admin-info .admin-info-box ul li a {
+  display: block;
+  line-height: 30px;
+  text-align: center;
+  color: #000;
+}
+header .admin-info .admin-info-box:hover ul {
+  display: block;
+}
+header .admin-info .skin-box {
+  position: relative;
+  padding-left: 14px;
+}
+header .admin-info .skin-box .skin-icon {
+  cursor: pointer;
+}
+header .admin-info .skin-box ul {
+  display: none;
+  position: absolute;
+  top: 60px;
+  right: -20px;
+  width: 80px;
+  background: #fff;
+  z-index: 100;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+header .admin-info .skin-box ul li {
+  border-bottom: 1px solid #eee;
+  line-height: 30px;
+  color: #000;
+  text-align: center;
+  cursor: pointer;
+}
+header .admin-info .skin-box:hover ul {
+  display: block;
+}
 header .admin-info a {
   color: #fff;
 }
@@ -276,6 +346,9 @@ article {
   font-size: 30px;
   line-height: 50px;
   margin-bottom: 20px;
+}
+.iframe-content h1 a {
+  color: #fff;
 }
 .iframe-content .page-box {
   display: flex;

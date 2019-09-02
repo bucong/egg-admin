@@ -1,5 +1,21 @@
 html{
-    height: 100%;
+  height: 100%;
+}
+@font-face {
+  font-family: 'iconfont';  /* project id 1382138 */
+  src: url('//at.alicdn.com/t/font_1382138_ag79oko9h3j.eot');
+  src: url('//at.alicdn.com/t/font_1382138_ag79oko9h3j.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1382138_ag79oko9h3j.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1382138_ag79oko9h3j.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1382138_ag79oko9h3j.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1382138_ag79oko9h3j.svg#iconfont') format('svg');
+}
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 body,h1,h2,h3,h4,h5,h6,hr,p,dl,dt,dd,ul,ol,li,pre,
 form,button,input,textarea,th,td{margin:0;padding:0;}
@@ -8,7 +24,7 @@ figure, figcaption, footer, header,
 menu, nav, section, audio, video{display: block;margin: 0;padding: 0;}
 h1,h2,h3,h4,h5,h6{font-size:100%;}
 li{list-style:none;}
-a,a:hover,a:link,a:visited,a:active{text-decoration:none;}
+a,a:hover,a:link,a:visited,a:active{text-decoration:none;color: #000;}
 img{border:0;}
 button,input,select,textarea{font-size:100%;outline: none}
 table{border-collapse:collapse;border-spacing:0;}
@@ -144,6 +160,65 @@ header{
 		font-size: 20px;
 	}
 	.admin-info{
+		.admin-info-box{
+			position: relative;
+			.admin-name{
+				cursor: pointer;
+			}
+			ul{
+				display: none;
+				position: absolute;
+				top: 60px;
+				left: -20px;
+				width: 80px;
+				background: #fff;
+				z-index: 100;
+				box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+				li{
+					border-bottom: 1px solid #eee;
+					a{
+						display: block;
+						line-height: 30px;
+						text-align: center;
+						color: #000;
+					}
+				}
+			}
+		}
+		.admin-info-box:hover{
+			ul{
+				display: block;
+			}
+		}
+		.skin-box{
+			position: relative;
+			padding-left: 14px;
+			.skin-icon{
+				cursor: pointer;
+			}
+			ul{
+				display: none;
+				position: absolute;
+				top: 60px;
+				right: -20px;
+				width: 80px;
+				background: #fff;
+				z-index: 100;
+				box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+				li{
+					border-bottom: 1px solid #eee;
+					line-height: 30px;
+					color: #000;
+					text-align: center;
+					cursor: pointer;
+				}
+			}
+		}
+		.skin-box:hover{
+			ul{
+				display: block;
+			}
+		}
 		a{
 			color: #fff;
 		}
@@ -195,6 +270,9 @@ article{
 		font-size: 30px;
 		line-height: 50px;
 		margin-bottom: 20px;
+		a{
+			color: #fff;
+		}
 	}
 	.page-box{
 		display: flex;

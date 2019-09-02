@@ -4,28 +4,28 @@ const BaseController = require('./base');
 
 class goodsTypeAttrController extends BaseController {
   async index() {
-    let cate_id = this.ctx.request.query.cate_id;
+    let type_id = this.ctx.request.query.type_id;
     const result = await this.app.mysql.select('goods_type_attr', {
       where: {
-        cate_id: cate_id
+        type_id
       }
     });
     await this.ctx.render('admin/goodsTypeAttr/index', {
       goodsTypeAttr: result,
-      cate_id: cate_id
+      type_id: type_id
     })
   }
   // 添加商品类型属性页面
   async add() {
-    let cate_id = this.ctx.request.query.cate_id;
+    let type_id = this.ctx.request.query.type_id;
     await this.ctx.render('admin/goodsTypeAttr/add', {
-      cate_id: cate_id
+      type_id
     })
   }
   // 添加商品类型属性
   async doAdd() {
     console.log(this.ctx.request.body);
-    let cate_id = this.ctx.request.body.cate_id;
+    let type_id = this.ctx.request.body.type_id;
     let title = this.ctx.request.body.title;
     let attr_type = this.ctx.request.body.attr_type;
     let attr_value = this.ctx.request.body.attr_value;
@@ -34,16 +34,16 @@ class goodsTypeAttrController extends BaseController {
     let result = await this.app.mysql.select('goods_type_attr', {
       where: {
         title,
-        cate_id
+        type_id
       }
     })
     if (result.length > 0) {
       await this.error('/admin/goodsTypeAttr/add', '该商品类型属性名称已存在');
     } else {
       await this.app.mysql.insert('goods_type_attr', {
-        cate_id, title, add_time, attr_type, attr_value
+        type_id, title, add_time, attr_type, attr_value
       })
-      await this.success('/admin/goodsTypeAttr?cate_id=' + cate_id);
+      await this.success('/admin/goodsTypeAttr?type_id=' + type_id);
     }
   }
   // 修改商品类型属性页面

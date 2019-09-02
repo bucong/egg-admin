@@ -2,37 +2,54 @@
 <header>
   <div class="flex">
     <div class="logo">商城管理系统</div>
-    <div class="admin-info">
-      <span>{{ adminInfo.username }}</span>
-      <a href="/admin/loginOut">退出</a>
+    <div class="admin-info flex">
+      <span>管理员</span>　
+      <div class="admin-info-box">
+        <span class="admin-name">{{ adminInfo.username }} <i class="iconfont">&#xe666;</i></span>
+        <ul>
+          <li><a href="/admin/manager/edit?id={{ adminInfo.id }}" target="rightMain">修改</a></li>
+          <li><a href="/admin/loginOut">退出</a></li>
+        </ul>
+      </div>
+      <div class="skin-box">
+        <span class="skin-icon"><i class="iconfont">&#xe638;</i></span>
+        <ul>
+          <li data-color="#3e3f35">黑色</li>
+          <li data-color="#2d6dcc">蓝色</li>
+          <li data-color="#19a97b">绿色</li>
+          <li data-color="#c81623">红色</li>
+          <li data-color="#ffd200">黄色</li>
+          <li data-color="#ff4a00">橙色</li>
+        </ul>
+      </div>
     </div>
   </div>
 </header>
 <div class="content-box">
   <aside id="aside">
     <div class="nav-item">
-      <h2>管理员管理</h2>
+      <h2><i class="iconfont">&#xe68a;</i> 管理员管理</h2>
       <ul class="hide-list">
         <li><a href="/admin/manager" target="rightMain">管理员列表</a></li>
         <li><a href="/admin/manager/add" target="rightMain">添加管理员</a></li>
       </ul>
     </div>
     <div class="nav-item">
-      <h2>角色管理</h2>
+      <h2><i class="iconfont">&#xe665;</i> 角色管理</h2>
       <ul class="hide-list">
         <li><a href="/admin/role" target="rightMain">角色列表</a></li>
         <li><a href="/admin/role/add" target="rightMain">添加角色</a></li>
       </ul>
     </div>
     <div class="nav-item">
-      <h2>轮播图管理</h2>
+      <h2><i class="iconfont">&#xe627;</i> 轮播图管理</h2>
       <ul>
         <li><a href="/admin/banner" target="rightMain">轮播图列表</a></li>
         <li><a href="/admin/banner/add" target="rightMain">添加轮播图</a></li>
       </ul>
     </div>
     <div class="nav-item">
-      <h2>商品管理</h2>
+      <h2><i class="iconfont">&#xe64f;</i> 商品管理</h2>
       <ul>
         <li><a href="/admin/goodsType" target="rightMain">商品类型</a></li>
         <li><a href="/admin/goodsCate" target="rightMain">商品分类</a></li>
@@ -41,28 +58,28 @@
       </ul>
     </div>
     <div class="nav-item">
-      <h2>会员管理</h2>
+      <h2><i class="iconfont">&#xe60e;</i> 会员管理</h2>
       <ul>
         <li><a href="/admin/user" target="rightMain">会员列表</a></li>
         <li><a href="/admin/cart" target="rightMain">购物车查询</a></li>
       </ul>
     </div>
     <div class="nav-item">
-      <h2>订单管理</h2>
+      <h2><i class="iconfont">&#xe62c;</i> 订单管理</h2>
       <ul>
         <li><a href="/admin/order" target="rightMain">订单列表</a></li>
         <li><a href="/admin/evaluate" target="rightMain">评价管理</a></li>
       </ul>
     </div>
     <div class="nav-item">
-      <h2>文章管理</h2>
+      <h2><i class="iconfont">&#xe661;</i> 文章管理</h2>
       <ul class="hide-list">
         <li><a href="/admin/article" target="rightMain">文章列表</a></li>
         <li><a href="/admin/article/add" target="rightMain">添加文章</a></li>
       </ul>
     </div>
     <div class="nav-item">
-      <h2>系统配置</h2>
+      <h2><i class="iconfont">&#xe611;</i> 系统配置</h2>
       <ul>
         <li><a href="/admin/pay" target="rightMain">支付系统</a></li>
         <li><a href="/admin/article/add" target="rightMain">系统参数</a></li>

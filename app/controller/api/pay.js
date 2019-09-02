@@ -68,6 +68,32 @@ class PayController extends Controller {
         }
      }
   }
+  // 退款
+  async tradeRefund(){
+    let params = {
+      out_trade_no: '1566654000089',
+      out_request_no: '2019082422001434050525780333',
+      refund_amount: 0.01
+    }
+    console.log(params);
+    let result = await this.service.alipay.tradeRefund(params);
+    // { code: '0',
+    //   data: { code: '10000', msg: 'Success' },
+    //   message: 'success' }
+    if (result.code == '0') {
+      this.ctx.body = {
+        code: 0,
+        data: '申请退款成功',
+        msg: ''
+      }
+    } else {
+      this.ctx.body = {
+        code: -1,
+        data: '',
+        msg: '申请退款失败'
+      }
+    }
+  }
 }
 
 module.exports = PayController;

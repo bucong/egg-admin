@@ -31,6 +31,11 @@ class AlipayService extends Service {
     const service = new Alipay(this.config.alipayOptions);
     return service.makeNotifyResponse(params);
   }
+  // 退款
+  tradeRefund(params){
+    const service = new Alipay(this.config.alipayOptions);
+    return service.tradeRefundQuery(params);
+  }
 }
 
 module.exports = AlipayService;
