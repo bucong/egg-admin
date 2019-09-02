@@ -203,8 +203,7 @@ class GoodsController extends BaseController {
       goods_fitting: fields.goods_fitting,
       seo_keywords: fields.seo_keywords,
       seo_desc: fields.seo_desc,
-      img_list: img_list,
-      add_time: (new Date()).getTime()
+      img_list: img_list
     }
     // 判断是否上传新的轮播图，替换原有轮播图
     if (thumbnail) {

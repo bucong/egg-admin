@@ -21,6 +21,7 @@
       <label for="email">邮箱</label>
       <input type="email" class="form-control" id="email" name="email" value="{{ manager.email }}" required />
     </div>
+    {% if adminInfo.is_super == 1 %}
     <div class="form-group">
       <label for="role">角色</label>
       <select class="form-control" name="role_id">
@@ -36,6 +37,7 @@
         <option value="1" {{ "selected" if manager.is_super == 1 else "" }}>是</option>
       </select>
     </div>
+    {% endif %}
     <button type="submit" class="btn btn-primary">提交</button>
   </form>
 </div>

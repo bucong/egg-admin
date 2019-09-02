@@ -15,7 +15,7 @@
 		{% for item in banner %}
 		<tr>
 			<td>
-        <img src="{{ item.img_url }}" width="200px" alt="">
+        <img src="{{ item.img_url }}" width="120px" alt="">
       </td>
 			<td>
 				<p style="width: 240px;word-wrap: break-word">
@@ -27,6 +27,7 @@
 			<td>{{ item.sort }}</td>
 			<td>{{ helper.formatDate(item.add_time) }}</td>
 			<td>
+				<a href="/admin/banner/edit?id={{ item.id }}"><i class="iconfont">&#xe63c;</i></a>　
 				<a class="delete" href="/admin/delete?model=banner&id={{ item.id }}"><i class="iconfont">&#xe612;</i></a>
 			</td>
 		</tr>

@@ -3,7 +3,7 @@
   <div class="flex">
     <div class="logo">商城管理系统</div>
     <div class="admin-info flex">
-      <span>管理员</span>　
+      <span>{{ "超级" if adminInfo.is_super == 1 }}管理员</span>　
       <div class="admin-info-box">
         <span class="admin-name">{{ adminInfo.username }} <i class="iconfont">&#xe666;</i></span>
         <ul>
@@ -27,6 +27,7 @@
 </header>
 <div class="content-box">
   <aside id="aside">
+    {% if adminInfo.is_super == 1 %}
     <div class="nav-item">
       <h2><i class="iconfont">&#xe68a;</i> 管理员管理</h2>
       <ul class="hide-list">
@@ -41,6 +42,7 @@
         <li><a href="/admin/role/add" target="rightMain">添加角色</a></li>
       </ul>
     </div>
+    {% endif %}
     <div class="nav-item">
       <h2><i class="iconfont">&#xe627;</i> 轮播图管理</h2>
       <ul>

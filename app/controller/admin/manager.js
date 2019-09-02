@@ -86,7 +86,7 @@ class ManagerController extends BaseController {
         id
       }
     })
-    await this.success('/admin/manager');
+    await this.success('/admin');
   }
 }
 

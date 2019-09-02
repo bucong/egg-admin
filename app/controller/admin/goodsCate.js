@@ -56,7 +56,6 @@ class Goods_cateController extends BaseController {
     let img_url = imgList[0];
     let fields = parts.field;
     let id = fields.id;
-    fields.add_time = (new Date()).getTime();
     if (img_url) {
       fields.cate_img = img_url;
     }

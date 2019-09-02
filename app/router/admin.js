@@ -36,6 +36,8 @@ module.exports = app => {
   router.get('/admin/banner', controller.admin.banner.index);
   router.get('/admin/banner/add', controller.admin.banner.add);
   router.post('/admin/banner/doAdd', controller.admin.banner.doAdd);
+  router.get('/admin/banner/edit', controller.admin.banner.edit);
+  router.post('/admin/banner/doEdit', controller.admin.banner.doEdit);
 
   // 商品类型
   router.get('/admin/goodsType', controller.admin.goodsType.index);
