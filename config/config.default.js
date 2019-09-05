@@ -49,6 +49,7 @@ module.exports = appInfo => {
   
   config.cors = {
     // origin: '*', //允许所有跨域访问，关闭则允许白名单访问
+    credentials: true, // 允许跨域请求携带cookies
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH'
   };
   
@@ -73,6 +74,16 @@ module.exports = appInfo => {
     agent: false,
   };
 
+  // redis配置
+  config.redis = {
+    client: {
+      port: 6379,
+      host: '127.0.0.1',
+      password: '', 
+      db: 0
+    }, 
+  }
+  
   // 支付宝配置参数
   config.alipayOptions = {
     app_id: '2018122062672017',     

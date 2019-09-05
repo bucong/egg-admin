@@ -20,3 +20,9 @@ exports.mysql = {
     enable: true,
     package: 'egg-mysql',
 };
+
+// redis
+exports.redis = {
+    enable: false,
+    package: 'egg-redis'
+}
