@@ -69,4 +69,7 @@ module.exports = app => {
   router.get('/admin/goods/edit', controller.admin.goods.edit);
   router.post('/admin/goods/doEdit', controller.admin.goods.doEdit);
   router.get('/admin/goods/delete', controller.admin.goods.delete);
+
+  // 用户信息
+  router.get('/admin/user', controller.admin.user.index);
 };

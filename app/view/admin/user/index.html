@@ -1,0 +1,75 @@
+{% include "../public/pageHeader.html" %}
+<link rel="stylesheet" href="../../../public/plugin/pagination/css/pagination.css">
+<div class="iframe-content">
+	<h1 class="flex">
+		<span>商品列表</span>
+		<form action="/admin/user" class="flex" method="GET">
+			<input type="hidden" name="_csrf" value="{{ csrf }}" />
+			<input type="search" class="form-control" name="search" value="{{search}}" placeholder="用户id或用户名">　
+			<button class="btn btn-primary" type="submit">查询</button>
+		</form>
+	</h1>
+	<table class="table table-hover">
+		<tr>
+			<th>id</th>
+			<th>头像</th>
+			<th>名称</th>
+			<th>手机号</th>
+			<th>登录方式</th>
+			<th>创建时间</th>
+			<th>状态</th>
+			<th>操作</th>
+		</tr>
+		{% for item in user %}
+		<tr>
+			<td>{{ item.id }}</td>
+			<td><img src="{{ item.figureurl }}" width="80px" alt=""></td>
+			<td>{{ item.name }}</td>
+			<td>{{ item.phone }}</td>
+			<td>
+				{% if item.login_type == 1 %}
+				QQ
+				{% elif item.login_type == 2 %}
+				微信
+				{% else %}
+				手机
+				{% endif %}
+			</td>
+			<td>{{ helper.formatDate(item.add_time) }}</td>
+			<td>
+				{% if item.status == 1 %}
+					<img src="../../../public/img/yes.gif" onclick="app.changeStatus(this,'user','{{item.id}}')" alt="">
+				{% else %}
+					<img src="../../../public/img/no.gif" onclick="app.changeStatus(this,'user','{{item.id}}')" alt="">
+				{% endif %}
+			</td>
+			<td>
+				<a class="delete" href="/admin/delete?model=goods_cate&id={{ item.id }}"><i class="iconfont">&#xe612;</i></a>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+	<div class="page-box">
+		<div class="M-box"></div>
+	</div>
+</div>
+
+{% include "../public/pageFooter.html" %}
+<script src="../../../public/plugin/pagination/js/jquery.pagination.js"></script>
+<script>
+	$('.M-box').pagination({
+		pageCount: Number('{{totalPage}}'),
+		current: Number('{{pageNo}}'),
+    jump: true,
+		coping: true,
+		isHide: true, // 总页数为0或1时隐藏分页控件
+    homePage: '首页',
+    endPage: '末页',
+    prevContent: '上页',
+		nextContent: '下页',
+		callback: function(api){
+			console.log(api.getCurrent())
+			window.location.href = '/admin/user?pageNo=' + api.getCurrent()
+		}
+	});
+</script>

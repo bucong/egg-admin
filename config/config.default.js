@@ -44,7 +44,7 @@ module.exports = appInfo => {
       enable: false,
       ignoreJSON: false
     },
-    domainWhiteList: [], //白名单
+    domainWhiteList: ['http://127.0.0.1:8080'], //白名单
   };
   
   config.cors = {
@@ -84,6 +84,17 @@ module.exports = appInfo => {
     }, 
   }
   
+  // QQ登录参数
+  config.qqOptions = {
+    client_id: '101479867',
+    client_secret: '053cf1fc1b4a07f339ff213665d5523f'
+  }
+
+  // 手机验证码key
+  config.phoneOptions = {
+    apikey: '62c24eee15f35061421cb0e0beca9e0a'
+  }
+
   // 支付宝配置参数
   config.alipayOptions = {
     app_id: '2018122062672017',     

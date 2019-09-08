@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50633
 File Encoding         : 65001
 
-Date: 2019-09-05 23:55:52
+Date: 2019-09-08 13:55:41
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -230,3 +230,31 @@ CREATE TABLE `role` (
 -- ----------------------------
 INSERT INTO `role` VALUES ('6', '网站运维', '网站运维', '1', '1565964616635');
 INSERT INTO `role` VALUES ('7', '商品管理', '商品管理', '1', '1565964712756');
+
+-- ----------------------------
+-- Table structure for user
+-- ----------------------------
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `password` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `send_code` varchar(6) DEFAULT NULL,
+  `send_time` varchar(15) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `login_type` int(1) DEFAULT NULL,
+  `qq_openId` varchar(255) DEFAULT NULL,
+  `wx_openId` varchar(255) DEFAULT NULL,
+  `token` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `figureurl` varchar(255) DEFAULT NULL COMMENT '头像',
+  `status` int(1) DEFAULT '1',
+  `add_time` varchar(15) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user
+-- ----------------------------
+INSERT INTO `user` VALUES ('2', null, null, null, null, null, '1', '9B6C01E2ACF80B2D8307FD8125AFDAA7', null, '8IxMhKsR1567846672670', '不求甚解', 'http://qzapp.qlogo.cn/qzapp/101479867/9B6C01E2ACF80B2D8307FD8125AFDAA7/30', '1', '1567846672670');
+INSERT INTO `user` VALUES ('3', null, '17621960934', '909812', '1567920545518', null, '3', null, null, null, null, null, '0', '1567919312130');
